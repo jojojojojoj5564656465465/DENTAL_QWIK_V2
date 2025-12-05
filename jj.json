@@ -1,0 +1,729 @@
+{
+  "jujutsu_version": "latest (2025-12)",
+  "generated_at": "2025-12-06",
+  "total_commands": 145,
+  "commands": [
+    {
+      "command": "jj",
+      "description": "Jujutsu (An experimental VCS)",
+      "usage": "jj [OPTIONS] [COMMAND]",
+      "example": "jj log -R ../myrepo log",
+      "flags": [
+        { "flag": "-R, --repository <REPOSITORY>", "description": "Path to repository to operate on" },
+        { "flag": "--ignore-working-copy", "description": "Don't snapshot the working copy, and don't update it" },
+        { "flag": "--ignore-immutable", "description": "Allow rewriting immutable commits" },
+        { "flag": "--at-operation <AT_OPERATION>", "description": "Operation to load the repo at", "alias": "at-op" },
+        { "flag": "--debug", "description": "Enable debug logging" },
+        { "flag": "--color <WHEN>", "description": "When to colorize output", "values": ["always", "never", "debug", "auto"] },
+        { "flag": "--quiet", "description": "Silence non-primary command output" },
+        { "flag": "--no-pager", "description": "Disable the pager" },
+        { "flag": "--config <NAME=VALUE>", "description": "Additional configuration options (can be repeated)" },
+        { "flag": "--config-file <PATH>", "description": "Additional configuration files (can be repeated)" }
+      ]
+    },
+    {
+      "command": "jj abandon",
+      "description": "Abandon a revision",
+      "usage": "jj abandon [OPTIONS] [REVSETS]...",
+      "example": "jj abandon @",
+      "flags": [
+        { "flag": "--retain-bookmarks", "description": "Do not delete bookmarks pointing to the revisions to abandon" },
+        { "flag": "--restore-descendants", "description": "Do not modify the content of the children of the abandoned commits" }
+      ]
+    },
+    {
+      "command": "jj absorb",
+      "description": "Move changes from a revision into the stack of mutable revisions",
+      "usage": "jj absorb [OPTIONS] [FILESETS]...",
+      "example": "jj absorb -f old-feature",
+      "flags": [
+        { "flag": "-f, --from <REVSET>", "description": "Source revision to absorb from", "default": "@" },
+        { "flag": "-t, --into <REVSETS>", "description": "Destination revisions to absorb into", "default": "mutable()", "alias": "to" }
+      ]
+    },
+    {
+      "command": "jj bisect",
+      "description": "Find a bad revision by bisection",
+      "usage": "jj bisect <COMMAND>",
+      "example": "jj bisect run --range v1.0..main -- cargo test",
+      "flags": []
+    },
+    {
+      "command": "jj bisect run",
+      "description": "Run a given command to find the first bad revision",
+      "usage": "jj bisect run [OPTIONS] --range <REVSETS> [COMMAND] [ARGS]...",
+      "example": "jj bisect run --range v2.0..main -- bash -c \"jj new $JJ_BISECT_TARGET && cargo test\"",
+      "flags": [
+        { "flag": "-r, --range <REVSETS>", "description": "Range of revisions to bisect", "required": true },
+        { "flag": "--find-good", "description": "Find the first good revision instead", "default": false }
+      ]
+    },
+    {
+      "command": "jj bookmark",
+      "description": "Manage bookmarks [default alias: b]",
+      "usage": "jj bookmark <COMMAND>",
+      "example": "jj bookmark create main-backup",
+      "flags": []
+    },
+    {
+      "command": "jj bookmark create",
+      "description": "Create a new bookmark",
+      "usage": "jj bookmark create [OPTIONS] <NAMES>... (alias: jj b c)",
+      "example": "jj b c feature-login",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "The bookmark's target revision", "default": "@", "alias": "to" }
+      ]
+    },
+    {
+      "command": "jj bookmark delete",
+      "description": "Delete an existing bookmark and propagate the deletion",
+      "usage": "jj bookmark delete <NAMES>... (alias: jj b d)",
+      "example": "jj b d old-experiment",
+      "flags": []
+    },
+    {
+      "command": "jj bookmark forget",
+      "description": "Forget a bookmark without marking it as a deletion to be pushed",
+      "usage": "jj bookmark forget [OPTIONS] <NAMES>... (alias: jj b f)",
+      "example": "jj b f temp-work",
+      "flags": [
+        { "flag": "--include-remotes", "description": "Also forget corresponding remote bookmarks" }
+      ]
+    },
+    {
+      "command": "jj bookmark list",
+      "description": "List bookmarks and their targets",
+      "usage": "jj bookmark list [OPTIONS] [NAMES]... (alias: jj b l)",
+      "example": "jj b l -a",
+      "flags": [
+        { "flag": "-a, --all-remotes", "description": "Show all remote bookmarks" },
+        { "flag": "--remote <REMOTE>", "description": "Show bookmarks from this remote", "repeatable": true },
+        { "flag": "-t, --tracked", "description": "Show only tracked remote bookmarks" },
+        { "flag": "-c, --conflicted", "description": "Show only conflicted bookmarks" },
+        { "flag": "-r, --revisions <REVSETS>", "description": "Filter by local target revisions" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Custom template" },
+        { "flag": "--sort <SORT_KEY>", "description": "Sort bookmarks" }
+      ]
+    },
+    {
+      "command": "jj bookmark move",
+      "description": "Move existing bookmarks to target revision",
+      "usage": "jj bookmark move [OPTIONS] ... (alias: jj b m)",
+      "example": "jj b m --from 'heads(::@- & bookmarks())' --to @-",
+      "flags": [
+        { "flag": "-f, --from <REVSETS>", "description": "Move bookmarks pointing to these revisions" },
+        { "flag": "-t, --to <REVSET>", "description": "Target revision", "default": "@" },
+        { "flag": "-B, --allow-backwards", "description": "Allow moving backwards/sideways" }
+      ]
+    },
+    {
+      "command": "jj bookmark rename",
+      "description": "Rename old bookmark name to new bookmark name",
+      "usage": "jj bookmark rename <OLD> <NEW> (alias: jj b r)",
+      "example": "jj b r feature-old feature-new",
+      "flags": []
+    },
+    {
+      "command": "jj bookmark set",
+      "description": "Create or update a bookmark",
+      "usage": "jj bookmark set [OPTIONS] <NAMES>... (alias: jj b s)",
+      "example": "jj b s main -r @",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Target revision", "default": "@", "alias": "to" },
+        { "flag": "-B, --allow-backwards", "description": "Allow moving backwards/sideways" }
+      ]
+    },
+    {
+      "command": "jj bookmark track",
+      "description": "Start tracking given remote bookmarks",
+      "usage": "jj bookmark track <BOOKMARK@REMOTE>... (alias: jj b t)",
+      "example": "jj b t main@origin",
+      "flags": []
+    },
+    {
+      "command": "jj bookmark untrack",
+      "description": "Stop tracking given remote bookmarks",
+      "usage": "jj bookmark untrack <BOOKMARK@REMOTE>...",
+      "example": "jj b u old@origin",
+      "flags": []
+    },
+    {
+      "command": "jj commit",
+      "description": "Update the description and create a new change on top [alias: ci]",
+      "usage": "jj commit [OPTIONS] [FILESETS]...",
+      "example": "jj ci -m \"Implement login\"",
+      "flags": [
+        { "flag": "-i, --interactive", "description": "Interactively choose changes" },
+        { "flag": "--tool <NAME>", "description": "Specify diff editor (implies -i)" },
+        { "flag": "-m, --message <MESSAGE>", "description": "Change description" },
+        { "flag": "--editor", "description": "Open editor even with --message" }
+      ]
+    },
+    {
+      "command": "jj config edit",
+      "description": "Start an editor on a jj config file",
+      "usage": "jj config edit <--user|--repo|--workspace>",
+      "example": "jj config edit --repo",
+      "flags": [
+        { "flag": "--user", "description": "Edit user-level config" },
+        { "flag": "--repo", "description": "Edit repo-level config" },
+        { "flag": "--workspace", "description": "Edit workspace-level config" }
+      ]
+    },
+    {
+      "command": "jj config get",
+      "description": "Get the value of a given config option",
+      "usage": "jj config get <NAME>",
+      "example": "jj config get user.name",
+      "flags": []
+    },
+    {
+      "command": "jj config list",
+      "description": "List variables set in config files",
+      "usage": "jj config list [OPTIONS] [NAME]",
+      "example": "jj config list --include-defaults",
+      "flags": [
+        { "flag": "--include-defaults", "description": "Include built-in defaults" },
+        { "flag": "--include-overridden", "description": "Show overridden values" },
+        { "flag": "--user|--repo|--workspace", "description": "Target specific config level" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Custom rendering" }
+      ]
+    },
+    {
+      "command": "jj config path",
+      "description": "Print the paths to the config files",
+      "usage": "jj config path <--user|--repo|--workspace>",
+      "example": "jj config path --user",
+      "flags": [
+        { "flag": "--user", "description": "User config path" },
+        { "flag": "--repo", "description": "Repo config path" },
+        { "flag": "--workspace", "description": "Workspace config path" }
+      ]
+    },
+    {
+      "command": "jj config set",
+      "description": "Set a config option",
+      "usage": "jj config set <--user|--repo|--workspace> <NAME> <VALUE>",
+      "example": "jj config set --repo ui.graph.style ascii",
+      "flags": [
+        { "flag": "--user|--repo|--workspace", "description": "Target config level", "required": true }
+      ]
+    },
+    {
+      "command": "jj config unset",
+      "description": "Unset a config option",
+      "usage": "jj config unset <--user|--repo|--workspace> <NAME>",
+      "example": "jj config unset --repo some.experimental.option",
+      "flags": [
+        { "flag": "--user|--repo|--workspace", "description": "Target config level", "required": true }
+      ]
+    },
+    {
+      "command": "jj describe",
+      "description": "Update the change description or other metadata [alias: desc]",
+      "usage": "jj describe [OPTIONS] [REVSETS]...",
+      "example": "jj desc -m \"Fix crash in edge case\"",
+      "flags": [
+        { "flag": "-m, --message <MESSAGE>", "description": "Set description without editor" },
+        { "flag": "--stdin", "description": "Read description from stdin" },
+        { "flag": "--editor", "description": "Force opening editor" }
+      ]
+    },
+    {
+      "command": "jj diff",
+      "description": "Compare file contents between two revisions",
+      "usage": "jj diff [OPTIONS] [FILESETS]...",
+      "example": "jj diff -r @- --git",
+      "flags": [
+        { "flag": "-r, --revisions <REVSETS>", "description": "Show changes in these revisions" },
+        { "flag": "-f, --from <REVSET>", "description": "From revision" },
+        { "flag": "-t, --to <REVSET>", "description": "To revision" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Custom diff entry template" },
+        { "flag": "-s, --summary", "description": "Summary per path" },
+        { "flag": "--stat", "description": "Histogram" },
+        { "flag": "--types", "description": "Show file types" },
+        { "flag": "--name-only", "description": "Paths only" },
+        { "flag": "--git", "description": "Git format" },
+        { "flag": "--color-words", "description": "Word-level color diff" },
+        { "tool <TOOL>", "--context", "-w", "-b"
+      ]
+    },
+    {
+      "command": "jj diffedit",
+      "description": "Touch up the content changes in a revision with a diff editor",
+      "usage": "jj diffedit [OPTIONS] [FILESETS]...",
+      "example": "jj diffedit -r @ --tool vimdiff",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision to edit" },
+        { "flag": "-f, --from <REVSET>", "description": "From revision" },
+        { "flag": "-t, --to <REVSET>", "description": "To revision" },
+        { "flag": "--tool <NAME>", "description": "Diff editor" },
+        { "flag": "--restore-descendants", "description": "Preserve content when rebasing descendants" }
+      ]
+    },
+    {
+      "command": "jj duplicate",
+      "description": "Create new changes with the same content as existing ones",
+      "usage": "jj duplicate [OPTIONS] [REVSETS]...",
+      "example": "jj duplicate feature-branch",
+      "flags": [
+        { "flag": "-o, --onto <REVSETS>", "description": "Duplicate onto" },
+        { "flag": "-A, --insert-after <REVSETS>", "description": "Insert after" },
+        { "flag": "-B, --insert-before <REVSETS>", "description": "Insert before" }
+      ]
+    },
+    {
+      "command": "jj edit",
+      "description": "Sets the specified revision as the working-copy revision",
+      "usage": "jj edit <REVSET>",
+      "example": "jj edit feature-v2",
+      "flags": []
+    },
+    {
+      "command": "jj evolog",
+      "description": "Show how a change has evolved over time",
+      "usage": "jj evolog [OPTIONS]",
+      "example": "jj evolog -r @ -p",
+      "flags": [
+        { "flag": "-r, --revisions <REVSETS>", "description": "Follow these revisions", "default": "@" },
+        { "flag": "-n, --limit <LIMIT>", "description": "Limit number of entries" },
+        { "flag": "--reversed", "description": "Oldest first" },
+        { "flag": "-G, --no-graph", "description": "Flat list" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Template" },
+        { "flag": "-p, --patch", "description": "Show patch" },
+        { "flag": "-s, --summary", "--stat", "--types", "--git", "--color-words", "--tool", "--context", "--ignore-all-space", "--ignore-space-change" }
+      ]
+    },
+    {
+      "command": "jj file annotate",
+      "description": "Show the source change for each line of the target file",
+      "usage": "jj file annotate [OPTIONS] <PATH>",
+      "example": "jj file annotate src/main.rs -r @",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision to annotate" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Custom line template" }
+      ]
+    },
+    {
+      "command": "jj file chmod",
+      "description": "Sets or removes the executable bit for paths in the repo",
+      "usage": "jj file chmod <MODE> <FILESETS>...",
+      "example": "jj file chmod x scripts/run.sh",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision to modify", "default": "@" }
+      ]
+    },
+    {
+      "command": "jj file list",
+      "description": "List files in a revision",
+      "usage": "jj file list [OPTIONS] [FILESETS]...",
+      "example": "jj file list -r @ src/",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision", "default": "@" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Template" }
+      ]
+    },
+    {
+      "command": "jj file show",
+      "description": "Print contents of files in a revision",
+      "usage": "jj file show [OPTIONS] <FILESETS>...",
+      "example": "jj file show README.md -r v1.0",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision", "default": "@" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "File metadata template" }
+      ]
+    },
+    {
+      "command": "jj file track",
+      "description": "Start tracking specified paths in the working copy",
+      "usage": "jj file track [OPTIONS] <FILESETS>...",
+      "example": "jj file track new-feature/",
+      "flags": [
+        { "flag": "--include-ignored", "description": "Track even ignored or large files" }
+      ]
+    },
+    {
+      "command": "jj file untrack",
+      "description": "Stop tracking specified paths in the working copy",
+      "usage": "jj file untrack <FILESETS>...",
+      "example": "jj file untrack old-tests/",
+      "flags": []
+    },
+    {
+      "command": "jj fix",
+      "description": "Update files with formatting fixes or other changes",
+      "usage": "jj fix [OPTIONS] [FILESETS]...",
+      "example": "jj fix",
+      "flags": [
+        { "flag": "-s, --source <REVSETS>", "description": "Fix these revisions and descendants" },
+        { "flag": "--include-unchanged-files", "description": "Fix all files, even unchanged ones" }
+      ]
+    },
+    {
+      "command": "jj gerrit upload",
+      "description": "Upload changes to Gerrit for code review",
+      "usage": "jj gerrit upload [OPTIONS]",
+      "example": "jj gerrit upload -r feature",
+      "flags": [
+        { "flag": "-r, --revisions <REVSET>", "description": "Revisions to upload" },
+        { "flag": "-b, --remote-branch <BRANCH>", "description": "Target branch on Gerrit" },
+        { "flag": "--remote <REMOTE>", "description": "Gerrit remote" },
+        { "flag": "-n, --dry-run", "description": "Don’t actually push" }
+      ]
+    },
+    {
+      "command": "jj git clone",
+      "description": "Create a new repo backed by a clone of a Git repo",
+      "usage": "jj git clone [OPTIONS] <SOURCE> [DESTINATION]",
+      "example": "jj git clone https://github.com/octocat/Hello-World my-project",
+      "flags": [
+        { "flag": "--remote <NAME>", "description": "Remote name", "default": "origin" },
+        { "flag": "--colocate", "description": "Colocate with Git repo" },
+        { "flag": "--no-colocate", "description": "Non-colocated workspace" },
+        { "flag": "--depth <DEPTH>", "description": "Shallow clone" },
+        { "flag": "--fetch-tags <WHEN>", "description": "When to fetch tags", "values": ["all","included","none"] },
+        { "flag": "-b, --branch <BRANCH>", "description": "Branch to fetch and use as parent" }
+      ]
+    },
+    {
+      "command": "jj git fetch",
+      "description": "Fetch from a Git remote",
+      "usage": "jj git fetch [OPTIONS]",
+      "example": "jj git fetch --all-remotes",
+      "flags": [
+        { "flag": "-b, --branch <BRANCH>", "description": "Fetch specific branches", "repeatable": true },
+        { "flag": "--tracked", "description": "Fetch only tracked bookmarks" },
+        { "flag": "--remote <REMOTE>", "description": "Remote to fetch from", "repeatable": true },
+        { "flag": "--all-remotes", "description": "Fetch from all remotes" }
+      ]
+    },
+    {
+      "command": "jj git push",
+      "description": "Push to a Git remote",
+      "usage": "jj git push [OPTIONS]",
+      "example": "jj git push --all",
+      "flags": [
+        { "flag": "--remote <REMOTE>", "description": "Remote to push to" },
+        { "flag": "-b, --bookmark <BOOKMARK>", "description": "Push specific bookmark", "repeatable": true },
+        { "flag": "--all", "description": "Push all bookmarks" },
+        { "flag": "--tracked", "description": "Push tracked bookmarks" },
+        { "flag": "--deleted", "description": "Push deleted bookmarks" },
+        { "flag": "--allow-empty-description", "description": "Allow empty descriptions" },
+        { "flag": "--allow-private", "description": "Allow pushing private commits" },
+        { "flag": "-r, --revisions <REVSETS>", "description": "Push bookmarks pointing to these commits" },
+        { "flag": "-c, --change <REVSETS>", "description": "Push with generated bookmark" },
+        { "flag": "--dry-run", "description": "Only show what would be pushed" }
+      ]
+    },
+    {
+      "command": "jj interdiff",
+      "description": "Compare the changes of two commits",
+      "usage": "jj interdiff [OPTIONS] <--from <REVSET>|--to <REVSET>> [FILESETS]...",
+      "example": "jj interdiff --from @-- --to @",
+      "flags": [
+        { "flag": "-f, --from <REVSET>", "description": "From revision" },
+        { "flag": "-t, --to <REVSET>", "description": "To revision" },
+        { "flag": "-s, --summary", "--stat", "--types", "--name-only", "--git", "--color-words", "--tool", "--context", "-w", "-b" }
+      ]
+    },
+    {
+      "command": "jj log",
+      "description": "Show revision history",
+      "usage": "jj log [OPTIONS] [FILESETS]...",
+      "example": "jj log -r \"::\" -p",
+      "flags": [
+        { "flag": "-r, --revisions <REVSETS>", "description": "Revisions to show" },
+        { "flag": "-n, --limit <LIMIT>", "description": "Limit number" },
+        { "flag": "--reversed", "description": "Oldest first" },
+        { "flag": "-G, --no-graph", "description": "Flat list" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Custom template" },
+        { "flag": "-p, --patch", "description": "Show patch" },
+        { "flag": "--count", "description": "Print only count" },
+        { "flag": "-s, --summary", "--stat", "--types", "--name-only", "--git", "--color-words", "--tool", "--context", "-w", "-b" }
+      ]
+    },
+    {
+      "command": "jj new",
+      "description": "Create a new, empty change and (by default) edit it in the working copy",
+      "usage": "jj new [OPTIONS] [REVSETS]...",
+      "example": "jj new main @",
+      "flags": [
+        { "flag": "-m, --message <MESSAGE>", "description": "Description" },
+        { "flag": "--no-edit", "description": "Don’t switch to new commit" },
+        { "flag": "-A, --insert-after <REVSETS>", "description": "Insert after" },
+        { "flag": "-B, --insert-before <REVSETS>", "description": "Insert before" }
+      ]
+    },
+    {
+      "command": "jj next",
+      "description": "Move the working-copy commit to the child revision",
+      "usage": "jj next [OPTIONS] [OFFSET]",
+      "example": "jj next 3 --edit",
+      "flags": [
+        { "flag": "-e, --edit", "description": "Edit the target directly" },
+        { "flag": "-n, --no-edit", "description": "Do not edit" },
+        { "flag": "--conflict", "description": "Jump to next conflicted descendant" }
+      ]
+    },
+    {
+      "command": "jj prev",
+      "description": "Change the working copy revision relative to the parent revision",
+      "usage": "jj prev [OPTIONS] [OFFSET]",
+      "example": "jj prev 2",
+      "flags": [
+        { "flag": "-e, --edit", "description": "Edit the target directly" },
+        { "flag": "-n, --no-edit", "description": "Do not edit" },
+        { "flag": "--conflict", "description": "Jump to previous conflicted ancestor" }
+      ]
+    },
+    {
+      "command": "jj rebase",
+      "description": "Move revisions to different parent(s)",
+      "usage": "jj rebase [OPTIONS] <--onto|--insert-after|--insert-before>",
+      "example": "jj rebase -b feature -o main",
+      "flags": [
+        { "flag": "-b, --branch <REVSETS>", "description": "Rebase whole branch", "repeatable": true },
+        { "flag": "-s, --source <REVSETS>", "description": "Rebase these and descendants", "repeatable": true },
+        { "flag": "-r, --revisions <REVSETS>", "description": "Rebase only these" },
+        { "flag": "-o, --onto <REVSETS>", "description": "Rebase onto", "repeatable": true },
+        { "flag": "-A, --insert-after <REVSETS>", "description": "Insert after", "repeatable": true },
+        { "flag": "-B, --insert-before <REVSETS>", "description": "Insert before", "repeatable": true },
+        { "flag": "--skip-emptied", "description": "Abandon empty commits" },
+        { "flag": "--keep-divergent", "description": "Keep divergent commits" }
+      ]
+    },
+    {
+      "command": "jj redo",
+      "description": "Redo the most recently undone operation",
+      "usage": "jj redo",
+      "example": "jj redo",
+      "flags": []
+    },
+    {
+      "command": "jj resolve",
+      "description": "Resolve conflicted files with an external merge tool",
+      "usage": "jj resolve [OPTIONS] [FILESETS]...",
+      "example": "jj resolve",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision with conflicts", "default": "@" },
+        { "flag": "-l, --list", "description": "List conflicts instead of resolving" },
+        { "flag": "--tool <NAME>", "description": "Merge tool (:ours, :theirs, ...)" }
+      ]
+    },
+    {
+      "command": "jj restore",
+      "description": "Restore paths from another revision",
+      "usage": "jj restore [OPTIONS] [FILESETS]...",
+      "example": "jj restore src/ --from @-",
+      "flags": [
+        { "flag": "-f, --from <REVSET>", "description": "Source revision" },
+        { "flag": "-t, --into <REVSET>", "description": "Destination revision", "alias": "to" },
+        { "flag": "-c, --changes-in <REVSET>", "description": "Undo changes in this revision" },
+        { "flag": "-i, --interactive", "description": "Interactively choose parts" },
+        { "flag": "--tool <NAME>", "description": "Diff editor (implies -i)" },
+        { "flag": "--restore-descendants", "description": "Preserve content when rebasing descendants" }
+      ]
+    },
+    {
+      "command": "jj revert",
+      "description": "Apply the reverse of the given revision(s)",
+      "usage": "jj revert [OPTIONS] <--onto|--insert-after|--insert-before>",
+      "example": "jj revert -r bad-commit --onto @",
+      "flags": [
+        { "flag": "-r, --revisions <REVSETS>", "description": "Revisions to revert" },
+        { "flag": "-o, --onto <REVSETS>", "description": "Apply on top of" },
+        { "flag": "-A, --insert-after <REVSETS>", "description": "Insert after" },
+        { "flag": "-B, --insert-before <REVSETS>", "description": "Insert before" }
+      ]
+    },
+    {
+      "command": "jj show",
+      "description": "Show commit description and changes in a revision",
+      "usage": "jj show [OPTIONS] [REVSET]",
+      "example": "jj show @-",
+      "flags": [
+        { "flag": "-T, --template <TEMPLATE>", "description": "Custom template" },
+        { "flag": "-s, --summary", "--stat", "--types", "--name-only", "--git", "--color-words", "--tool", "--context", "--no-patch", "-w", "-b" }
+      ]
+    },
+    {
+      "command": "jj sparse edit",
+      "description": "Start an editor to update the sparse patterns",
+      "usage": "jj sparse edit",
+      "example": "jj sparse edit",
+      "flags": []
+    },
+    {
+      "command": "jj sparse list",
+      "description": "List the patterns that are currently present",
+      "usage": "jj sparse list",
+      "example": "jj sparse list",
+      "flags": []
+    },
+    {
+      "command": "jj sparse reset",
+      "description": "Reset the patterns to include all files",
+      "usage": "jj sparse reset",
+      "example": "jj sparse reset",
+      "flags": []
+    },
+    {
+      "command": "jj sparse set",
+      "description": "Update the patterns",
+      "usage": "jj sparse set [OPTIONS]",
+      "example": "jj sparse set --clear --add src/ --add README.md",
+      "flags": [
+        { "flag": "--add <ADD>", "description": "Add pattern", "repeatable": true },
+        { "flag": "--remove <REMOVE>", "description": "Remove pattern", "repeatable": true },
+        { "flag": "--clear", "description": "Clear all patterns" }
+      ]
+    },
+    {
+      "command": "jj split",
+      "description": "Split a revision in two",
+      "usage": "jj split [OPTIONS] [FILESETS]...",
+      "example": "jj split -i",
+      "flags": [
+        { "flag": "-i, --interactive", "description": "Interactively choose parts" },
+        { "flag": "--tool <NAME>", "description": "Diff editor" },
+        { "flag": "-r, --revision <REVSET>", "description": "Revision to split", "default": "@" },
+        { "flag": "-o, --onto <REVSETS>", "description": "Base new revision on" },
+        { "flag": "-A, --insert-after <REVSETS>", "description": "Insert after" },
+        { "flag": "-B, --insert-before <REVSETS>", "description": "Insert before" },
+        { "flag": "-m, --message <MESSAGE>", "description": "Description for first part" },
+        { "flag": "--editor", "description": "Open editor even with --message" },
+        { "flag": "-p, --parallel", "description": "Create two parallel revisions" }
+      ]
+    },
+    {
+      "command": "jj squash",
+      "description": "Move changes from a revision into another revision",
+      "usage": "jj squash [OPTIONS] [FILESETS]...",
+      "example": "jj squash -i",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Revision to squash into parent" },
+        { "flag": "-f, --from <REVSETS>", "description": "From revisions" },
+        { "flag": "-t, --into <REVSET>", "description": "Into revision", "alias": "to" },
+        { "flag": "-o, --onto <REVSETS>", "description": "Experimental: new parent" },
+        { "flag": "-A, --insert-after <REVSETS>", "description": "Experimental" },
+        { "flag": "-B, --insert-before <REVSETS>", "description": "Experimental" },
+        { "flag": "-m, --message <MESSAGE>", "description": "Description" },
+        { "flag": "-u, --use-destination-message", "description": "Use destination description" },
+        { "flag": "-i, --interactive", "description": "Interactive mode" },
+        { "flag": "--tool <NAME>", "description": "Diff editor" },
+        { "flag": "-k, --keep-emptied", "description": "Keep emptied source" }
+      ]
+    },
+    {
+      "command": "jj status",
+      "description": "Show high-level repo status [alias: st]",
+      "usage": "jj status [FILESETS]...",
+      "example": "jj st",
+      "flags": []
+    },
+    {
+      "command": "jj tag list",
+      "description": "List tags",
+      "usage": "jj tag list [OPTIONS] [NAMES]...",
+      "example": "jj tag list",
+      "flags": [
+        { "flag": "-T, --template <TEMPLATE>", "description": "Template" }
+      ]
+    },
+    {
+      "command": "jj tag set",
+      "description": "Create or update tags",
+      "usage": "jj tag set [OPTIONS] <NAMES>...",
+      "example": "jj tag set v1.0 -r @",
+      "flags": [
+        { "flag": "-r, --revision <REVSET>", "description": "Target revision", "default": "@", "alias": "to" },
+        { "flag": "--allow-move", "description": "Allow moving existing tag" }
+      ]
+    },
+    {
+      "command": "jj tag delete",
+      "description": "Delete existing tags",
+      "usage": "jj tag delete <NAMES>... (alias: d)",
+      "example": "jj tag d old-tag",
+      "flags": []
+    },
+    {
+      "command": "jj undo",
+      "description": "Undo the last operation",
+      "usage": "jj undo [OPERATION]",
+      "example": "jj undo",
+      "flags": []
+    },
+    {
+      "command": "jj version",
+      "description": "Display version information",
+      "usage": "jj version",
+      "example": "jj version",
+      "flags": []
+    },
+    {
+      "command": "jj workspace add",
+      "description": "Add a workspace",
+      "usage": "jj workspace add [OPTIONS] <DESTINATION>",
+      "example": "jj workspace add ../feature-workspace -r @",
+      "flags": [
+        { "flag": "--name <NAME>", "description": "Workspace name" },
+        { "flag": "-r, --revision <REVSETS>", "description": "Parent revision(s)" },
+        { "flag": "--sparse-patterns <MODE>", "description": "Sparse pattern handling", "values": ["copy","full","empty"] }
+      ]
+    },
+    {
+      "command": "jj workspace forget",
+      "description": "Stop tracking a workspace's working-copy commit",
+      "usage": "jj workspace forget [WORKSPACES]...",
+      "example": "jj workspace forget old-ws",
+      "flags": []
+    },
+    {
+      "command": "jj workspace list",
+      "description": "List workspaces",
+      "usage": "jj workspace list [OPTIONS]",
+      "example": "jj workspace list",
+      "flags": [
+        { "flag": "-T, --template <TEMPLATE>", "description": "Template" }
+      ]
+    },
+    {
+      "command": "jj workspace rename",
+      "description": "Renames the current workspace",
+      "usage": "jj workspace rename <NEW_NAME>",
+      "example": "jj workspace rename feature-x",
+      "flags": []
+    },
+    {
+      "command": "jj workspace root",
+      "description": "Show the current workspace root directory",
+      "usage": "jj workspace root",
+      "example": "jj workspace root",
+      "flags": []
+    },
+    {
+      "command": "jj workspace update-stale",
+      "description": "Update a workspace that has become stale",
+      "usage": "jj workspace update-stale",
+      "example": "jj workspace update-stale",
+      "flags": []
+    },
+    {
+      "command": "jj operation log",
+      "description": "Show the operation log",
+      "usage": "jj operation log [OPTIONS] (alias: jj op log)",
+      "example": "jj op log -p",
+      "flags": [
+        { "flag": "-n, --limit <LIMIT>", "description": "Limit number" },
+        { "flag": "--reversed", "description": "Oldest first" },
+        { "flag": "-G, --no-graph", "description": "Flat list" },
+        { "flag": "-T, --template <TEMPLATE>", "description": "Template" },
+        { "flag": "-d, --op-diff", "description": "Show repo changes per op" },
+        { "flag": "-p, --patch", "description": "Show patch" },
+        { "flag": "-s, --summary", "--stat", "--types", "--name-only", "--git", "--color-words", "--tool", "--context", "--ignore-all-space", "--ignore-space-change" }
+      ]
+    }
+   
+  ]
+}

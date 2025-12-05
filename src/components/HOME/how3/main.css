@@ -1,0 +1,21 @@
+.openDescription {
+  color: inherit;
+  display: block;
+  margin-top: 1rem;
+  cursor: auto;
+}
+.closeDescription {
+  visibility: hidden;
+  display: none;
+  cursor: auto;
+}
+.notificationBaseCss::after {
+  font-size: 0.8rem;
+  color: rgb(5, 78, 213);
+}
+.notificationClosedCss::after {
+  content: " - ";
+}
+.notificationOpenCss::after {
+  content: " + ";
+}

@@ -1,0 +1,14 @@
+.counter {
+  font-size: 2rem;
+  color: blue;
+  cursor: pointer;
+  &:hover {
+    color: rgb(10, 120, 223);
+  }
+}
+
+.title {
+  font-weight: bold;
+  color: violet;
+  font-size: 3rem;
+}
