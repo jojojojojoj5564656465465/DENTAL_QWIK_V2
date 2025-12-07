@@ -1,8 +1,9 @@
-import { container, flex } from "@recipe";
+import { flex } from "@recipe";
 import { media, space } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
 import { color } from "@theme";
 import { style } from "@vanilla-extract/css";
+import { container } from "~/styles/container/index.css";
 
 export const wrapper = style([
   container({ size: "small" }),

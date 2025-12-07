@@ -4,11 +4,9 @@ import {
   useSignal,
   useVisibleTask$,
 } from "@builder.io/qwik";
-import {
-  containerGridMaxColumn,
-  textRecipe as R,
-  textSprinkles as S,
-} from "@recipe";
+import { textRecipe as R, textSprinkles as S } from "@recipe";
+import { containerGridMaxColumn } from "~/styles/container/index.css.ts";
+
 import D from "./data.ts";
 import { hr } from "./vanity.css.ts";
 

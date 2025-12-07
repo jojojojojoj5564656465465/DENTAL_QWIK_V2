@@ -1,4 +1,5 @@
-import { containerGrid, textRecipe } from "@recipe";
+import { containerGrid } from "@container";
+import { textRecipe } from "@recipe";
 import { media, space } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
 import { createVar, style, styleVariants } from "@vanilla-extract/css";

@@ -1,9 +1,9 @@
 import { createVar, fallbackVar } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils"; // Import calc utility
 import { recipe } from "@vanilla-extract/recipes";
+import { textSprinkles } from "../recipe/textSprinkles.css.ts";
 import { defaultContainer, maxInlineSizeFn } from "../utils/base.css";
 import { colorTheme, theme } from "../utils/themeNew.css";
-import { textSprinkles } from "./textSprinkles.css";
 
 const gridMaxColCount = createVar({
   syntax: "<integer>", // Expects a whole number
@@ -28,7 +28,7 @@ export const containerGridMaxColumn = recipe({
     defaultContainer,
     {
       display: "grid",
-      marginInline: "auto",
+      marginInline: "auto", ///a supprimer car j'ai importer default container
       gap: gridGap,
       gridTemplateColumns: `repeat(auto-fit, minmax(min(100%, max(${gridMinColSize}, ${calc(
         "100%",

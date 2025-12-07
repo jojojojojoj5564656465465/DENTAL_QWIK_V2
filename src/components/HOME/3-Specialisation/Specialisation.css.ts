@@ -1,5 +1,5 @@
-import { container, containerGrid, flex } from "@recipe";
-
+import { container, containerGrid } from "@container";
+import { flex } from "@recipe";
 import { space } from "@styles/token";
 import { color } from "@theme";
 import { globalStyle, style, styleVariants } from "@vanilla-extract/css";

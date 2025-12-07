@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@styles/*": ["./src/styles/*"],
       "@recipe": ["./src/styles/recipe/index.css.ts"],
+      "@container": ["./src/styles/container/index.css.ts"],
       "@img/*": ["./src/assets/img/*"],
       "@theme": ["./src/styles/utils/themeNew.css"],
       "@fonts": ["./src/assets/fonts/*"],

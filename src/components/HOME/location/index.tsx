@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { containerGridMaxColumn } from "@recipe";
+import { containerGridMaxColumn } from "@container";
 import Title from "@/components/Content";
 import Button from "../../Button";
 

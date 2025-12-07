@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { containerGridMaxColumn } from "@recipe";
+import { containerGridMaxColumn } from "@container";
 import Content from "../../Content";
 import HowItWorksComponent from "./Accordeon.tsx";
 import { bgImage, leftBoxWrapper } from "./content.css";

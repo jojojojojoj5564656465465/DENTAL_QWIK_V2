@@ -1,5 +1,6 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { containerGrid, textRecipe as R } from "@recipe";
+import { containerGrid } from "@container";
+import { textRecipe as R } from "@recipe";
 
 interface Props {
   subtitle: string;

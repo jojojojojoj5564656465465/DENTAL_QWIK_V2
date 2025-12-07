@@ -1,7 +1,6 @@
-import { component$, Slot, useStylesScoped$ } from "@builder.io/qwik";
-import { container } from "@/styles/recipe";
+import { component$, Slot } from "@builder.io/qwik";
+
 import { article } from "./main.css.ts";
-import style from "./style.css?inline";
 export default component$(() => {
   // useStylesScoped$(style);
   //useStyles$(article);

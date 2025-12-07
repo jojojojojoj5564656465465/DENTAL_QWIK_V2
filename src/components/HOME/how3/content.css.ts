@@ -1,6 +1,6 @@
 // /home/tom/Documents/DEV/dentistLanding/src/components/HOME/howItWorks/content.css.ts
 
-import { container, textRecipe as R } from "@recipe";
+import { textRecipe as R } from "@recipe";
 import {
   createVar,
   keyframes,
@@ -9,6 +9,7 @@ import {
 } from "@vanilla-extract/css";
 import { createBorderImage, fluid } from "@/styles/utils";
 import { color } from "@/styles/utils/themeNew.css.ts";
+import { container } from "~/styles/container/index.css";
 
 // Animation pour le changement de couleur progressif
 const changeColor = keyframes({

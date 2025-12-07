@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { containerGridMaxColumn } from "@recipe";
+import { containerGridMaxColumn } from "@container";
 import { Image } from "@unpic/qwik";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Button from "../../Button/index.tsx";

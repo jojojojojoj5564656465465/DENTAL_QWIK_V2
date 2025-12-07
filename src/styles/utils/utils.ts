@@ -1,4 +1,4 @@
-import { type GlobalStyleRule, globalStyle, style } from "@vanilla-extract/css";
+import { type GlobalStyleRule, globalStyle } from "@vanilla-extract/css";
 import {
   array,
   description,

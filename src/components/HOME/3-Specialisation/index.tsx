@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { container } from "@recipe";
+import { container } from "~/styles/container/index.css";
 import Card from "./Card";
 import * as s from "./Specialisation.css";
 

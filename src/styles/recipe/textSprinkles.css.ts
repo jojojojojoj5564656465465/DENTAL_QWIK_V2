@@ -1,7 +1,7 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 
 // Assuming these imports are correctly set up
-import { media, space } from "../token"; // Renamed imported 'space' to avoid conflict
+import { media } from "../token/index.ts"; // Renamed imported 'space' to avoid conflict
 import f from "../utils/fontFace.css.ts"; // Make sure these are exported font family names
 import { theme } from "../utils/themeNew.css.ts"; // Make sure 'theme' structure matches usage (e.g., theme.primary or theme.colors.primary)
 import marginPaddingSprinkles from "./spaceMarginPadding.css.ts"; // Ensure this is the defineProperties result

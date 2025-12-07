@@ -1,8 +1,6 @@
 /**
  * MARK: SPACES
  */
-
-// biome-ignore assist/source/useSortedKeys: <Il faut laisser pour la lisibilité>
 export const space = {
   xxxs: "clamp(0.3125em, 0.3125em + 0dvw, 0.3125em)",
   xxs: "clamp(0.5625em, 0.5408em + 0.1087dvw, 0.625em)",

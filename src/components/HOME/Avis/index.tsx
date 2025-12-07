@@ -5,8 +5,8 @@ import {
   useSignal,
   useStylesScoped$,
 } from "@builder.io/qwik";
-import { container } from "@recipe";
 import { Image } from "@unpic/qwik";
+import { container } from "~/styles/container/index.css";
 import styles from "./Testimonial-section.css?inline";
 
 interface Testimonial {

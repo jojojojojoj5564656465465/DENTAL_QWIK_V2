@@ -1,4 +1,4 @@
-import { container, containerGrid, textRecipe } from "@recipe";
+import { textRecipe } from "@recipe";
 import { fontSize, media, space } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
 import { color } from "@theme";
@@ -8,6 +8,7 @@ import {
   style,
   styleVariants,
 } from "@vanilla-extract/css";
+import { container, containerGrid } from "~/styles/container/index.css";
 
 export const sectionContainerIndex = style([
   {

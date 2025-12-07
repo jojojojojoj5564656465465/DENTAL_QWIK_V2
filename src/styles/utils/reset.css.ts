@@ -1,7 +1,8 @@
 import { fontSize } from "@styles/token";
 import { fallbackVar, globalStyle } from "@vanilla-extract/css";
-import { color, theme, fontFamily } from "../utils/themeNew.css.ts";
+import { color, fontFamily, theme } from "../utils/themeNew.css.ts";
 import { base, reset } from "./layer.css.ts";
+
 //import * as T from "./theme.css";
 
 globalStyle("*, *::before, *::after", {
@@ -187,7 +188,7 @@ globalStyle("p", {
   "@layer": {
     [base]: {
       lineHeight: "28px",
-      fontSize: fontSize["base"],
+      fontSize: fontSize.base,
       fontWeight: "400",
       color: fallbackVar(theme.text, "#527282"),
       fontFamily: "Poppins",

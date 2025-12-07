@@ -9,7 +9,7 @@ import { textRecipe } from "~/styles/recipe/textRecipe.css";
 import { textSprinkles } from "~/styles/recipe/textSprinkles.css";
 import * as imageStyles from "./image.css"; // contient menBG, sectionWrapper, wrapper
 
-const ImageSchema = v.pipe(
+const _ImageSchema = v.pipe(
   v.file("Please select an image file."),
   v.mimeType(
     ["image/jpeg", "image/png", "image/webp", "image/avif"],
