@@ -1,10 +1,11 @@
-// src/components/VisitClinic/VisitClinic.tsx
 import { component$ } from "@builder.io/qwik";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
 // Import statique de l'image (Qwik City gère l'optimisation via Vite)
 //import menImage from "@/assets/men.avif?jsx";
-import { textRecipe } from "~/styles/recipe/textRecipe.css";
-import { textSprinkles } from "~/styles/recipe/textSprinkles.css";
+import { textRecipe, textSprinkles } from "@recipe";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+
+//export {  } from "./src/styles/recipe/sprinkles/textSprinkles.css";
+
 import * as imageStyles from "./image.css"; // contient menBG, sectionWrapper, wrapper
 
 const publicImageBackgroundImage =

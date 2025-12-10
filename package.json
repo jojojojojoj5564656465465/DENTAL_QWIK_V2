@@ -18,7 +18,7 @@
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
-    "lint:biome": "biome lint --write --unsafe ./src & biome format --write ./src",
+    "lint:biome": "biome lint --write --unsafe ./src & biome format --write ./src & biome check ./src",
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"

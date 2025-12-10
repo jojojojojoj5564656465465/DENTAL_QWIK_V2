@@ -1,10 +1,77 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 
 // Assuming these imports are correctly set up
-import { media } from "../token/index.ts"; // Renamed imported 'space' to avoid conflict
+import { media, space } from "../token/index.ts"; // Renamed imported 'space' to avoid conflict
 import f from "../utils/fontFace.css.ts"; // Make sure these are exported font family names
 import { theme } from "../utils/themeNew.css.ts"; // Make sure 'theme' structure matches usage (e.g., theme.primary or theme.colors.primary)
-import marginPaddingSprinkles from "./spaceMarginPadding.css.ts"; // Ensure this is the defineProperties result
+
+const colorProperties = defineProperties({
+  properties: {
+    color: theme,
+    backgroundColor: theme,
+    borderColor: theme,
+    outlineColor: theme,
+    textDecorationColor: theme,
+    strokeColor: theme,
+    fill: theme,
+    stroke: theme,
+    caretColor: ["transparent", "inherit"], // Extend caretColor options
+  },
+  shorthands: {
+    bg: ["backgroundColor"],
+    bc: ["borderColor"],
+    outline: ["outlineColor"],
+    textDecoration: ["textDecorationColor"],
+    stroke: ["strokeColor"],
+    fill: ["fill"],
+    caret: ["caretColor"],
+  },
+});
+
+const spaceMarginPadding = defineProperties({
+  conditions: {
+    mobile: {},
+    tablet: { "@media": media.tablet },
+    desktop: { "@media": media.md },
+  },
+  defaultCondition: "mobile",
+  responsiveArray: ["mobile", "tablet", "desktop"],
+  properties: {
+    paddingInlineStart: space,
+    paddingInlineEnd: space,
+    paddingInline: space,
+    paddingBlock: space,
+    paddingBlockStart: space,
+    paddingBlockEnd: space,
+    padding: space,
+
+    marginInlineStart: space,
+    marginInlineEnd: space,
+    marginBlockStart: space,
+    marginBlockEnd: space,
+    marginInline: space,
+    marginBlock: space,
+    margin: space,
+  },
+  shorthands: {
+    py: ["paddingBlock"],
+    my: ["marginBlockEnd", "marginBlockStart"],
+    px: ["paddingInlineEnd", "paddingInlineStart"],
+    mx: ["marginInlineEnd", "marginInlineStart"],
+    m: [
+      "marginInlineEnd",
+      "marginInlineStart",
+      "marginBlockEnd",
+      "marginBlockStart",
+    ],
+    p: [
+      "paddingInlineEnd",
+      "paddingInlineStart",
+      "paddingBlockEnd",
+      "paddingBlockStart",
+    ],
+  },
+});
 
 // Define semantic line heights (unitless are generally recommended)
 const lineHeights = {
@@ -78,11 +145,6 @@ const textProperties = defineProperties({
     letterSpacing: letterSpacings,
     fontStyle: ["normal", "italic", "inherit"],
 
-    // --- Color & Appearance ---
-    color: theme, // Assumes theme = { primary: '...', accent: '...', etc. }
-    backgroundColor: theme,
-    borderColor: theme, // Useful if text elements have borders
-
     // --- Text Layout & Decoration ---
     textAlign: [
       "left",
@@ -118,7 +180,6 @@ const textProperties = defineProperties({
     cursor: ["pointer", "default", "text", "not-allowed"], // Optional: If text acts as interactive element
     userSelect: ["none", "text", "all", "auto"], // Optional: Control text selection
     caret: ["auto", "default", "pointer", "text", "wait"], // Optional: Caret appearance
-    caretColor: ["transparent", "inherit"], // Extend caretColor options
   },
   // No text-specific shorthands defined here, usually better to keep atomic
   // shorthands: { ... }
@@ -127,7 +188,8 @@ const textProperties = defineProperties({
 // Combine text properties with margin/padding properties
 export const textSprinkles = createSprinkles(
   textProperties,
-  marginPaddingSprinkles,
+  spaceMarginPadding,
+  colorProperties,
 );
 
 // Export the type for easier use in components
