@@ -14,7 +14,7 @@ export const container = recipe({
     position: "relative",
     boxSizing: "border-box",
     color: theme.text,
-    marginInline: "auto",
+
   },
   variants: {
     theme: {
@@ -30,6 +30,7 @@ export const container = recipe({
     },
     marginInline: {
       auto: { marginInline: "auto" },
+      none: { marginInline: "none" },
       sm: textSprinkles({ marginInline: "sm" }),
       md: textSprinkles({ marginInline: "md" }),
       lg: textSprinkles({ marginInline: "lg" }),
@@ -121,6 +122,7 @@ export const container = recipe({
       ],
       full: {
         maxInlineSize: "none",
+        //marginInline: 'calc(50% - 50vw)',
       },
     },
   },
@@ -135,12 +137,21 @@ export const container = recipe({
         borderRadius: "10px",
         textAlign: "center",
       },
-    },
+    }, {
+      variants: {
+        size: "full",
+        marginInline: 'none'
+      },
+      style: {
+        inlineSize: "100svw",
+      }
+    }
   ],
   defaultVariants: {
     hover: false,
     background: true,
     size: "full",
+    marginInline: "auto", 
   },
 });
 

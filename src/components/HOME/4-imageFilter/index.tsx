@@ -6,7 +6,7 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 //export {  } from "./src/styles/recipe/sprinkles/textSprinkles.css";
 
-import * as imageStyles from "./image.css"; // contient menBG, sectionWrapper, wrapper
+import * as s from "./image.css"; // contient menBG, sectionWrapper, wrapper
 
 const publicImageBackgroundImage =
   (dossier: string | null) => (fichier: `${string}.${string}`) => {
@@ -20,11 +20,11 @@ const imageFilterUrl = publicImageBackgroundImage(null);
 
 export default component$(() => {
   return (
-    <section class={imageStyles.sectionWrapper}>
+    <section class={s.sectionWrapper}>
       <div
-        class={imageStyles.wrapper}
+        class={s.wrapper}
         style={assignInlineVars({
-          [imageStyles.menBG]: imageFilterUrl("men.avif"),
+          [s.menBG]: imageFilterUrl("men.avif"),
         })}
       >
         <p class={textRecipe({ font: "preTitle", textAlign: "center" })}>

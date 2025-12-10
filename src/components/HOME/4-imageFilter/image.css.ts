@@ -4,6 +4,7 @@ import { color } from "@theme";
 import { createVar, style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 import { container } from "@container";
+
 const overlaping = createVar({
   syntax: "<length>",
   inherits: false,
@@ -17,7 +18,7 @@ export const overlay = style({
 
 export const sectionWrapper = style([
   overlay,
-  container({ hover: false, theme: "accent", display: "block", size: "full" }),
+  container({ hover: false, theme: "accent", display: "block", marginInline: 'none', size: "full" }),
   {
     blockSize: 600,
     aspectRatio: "21/9",
@@ -47,7 +48,7 @@ export const sectionWrapper = style([
 export const menBG = createVar();
 
 export const wrapper = style([
-  container({ size: "medium", background: false }),
+  container({ size: "medium", background: false, }),
   {
     clipPath: "inset(0 round 50px)",
     paddingBlock: fluid(5, 40),
