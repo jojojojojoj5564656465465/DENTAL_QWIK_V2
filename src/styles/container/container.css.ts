@@ -1,8 +1,14 @@
-import { fallbackVar, globalStyle } from "@vanilla-extract/css";
+import { fallbackVar, globalStyle, style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { textSprinkles } from "../recipe/textSprinkles.css.ts";
+import { textSprinkles } from "@recipe";
 import { maxInlineSizeFn } from "../utils/base.css.ts";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
+
+
+const sizeSmall = style({});
+const sizeMedium = style({});
+const sizeLarge = style({});
+const sizeXxl = style({});
 
 export const container = recipe({
   base: {
@@ -90,18 +96,30 @@ export const container = recipe({
       },
     },
     size: {
-      small: {
-        maxInlineSize: maxInlineSizeFn("small"),
-      },
-      medium: {
-        maxInlineSize: maxInlineSizeFn("medium"),
-      },
-      large: {
-        maxInlineSize: maxInlineSizeFn("large"),
-      },
-      xxl: {
-        maxInlineSize: maxInlineSizeFn("xxl"),
-      },
+      small: [
+        sizeSmall,
+        {
+          maxInlineSize: maxInlineSizeFn("small"),
+        },
+      ],
+      medium: [
+        sizeMedium,
+        {
+          maxInlineSize: maxInlineSizeFn("medium"),
+        },
+      ],
+      large: [
+        sizeLarge,
+        {
+          maxInlineSize: maxInlineSizeFn("large"),
+        },
+      ],
+      xxl: [
+        sizeXxl,
+        {
+          maxInlineSize: maxInlineSizeFn("xxl"),
+        },
+      ],
       full: {
         maxInlineSize: "none",
       },
@@ -127,28 +145,23 @@ export const container = recipe({
   },
 });
 
-// /home/tim/Documents/dentistLanding/src/styles/recipe/container.css.ts
-
-// ... other code ...
-
-// /home/tim/Documents/dentistLanding/src/styles/recipe/container.css.ts
 
 globalStyle(
-  // Cette ligne génère le sélecteur CSS invalide
-  `${container.classNames.variants.size.small}:has(> :is(${container.classNames.variants.size.medium}, ${container.classNames.variants.size.large}, ${container.classNames.variants.size.xxl})) > *`,
+  `${sizeSmall}:has(> :is(${sizeMedium}, ${sizeLarge}, ${sizeXxl})) > *`,
   {
     maxInlineSize: "100%",
   },
 );
 
 globalStyle(
-  `${container.classNames.variants.size.medium}:has(> :is(${container.classNames.variants.size.large}, ${container.classNames.variants.size.xxl})) > *`,
+  `${sizeMedium}:has(> :is(${sizeLarge}, ${sizeXxl})) > *`,
   {
     maxInlineSize: "100%",
   },
 );
+
 globalStyle(
-  `${container.classNames.variants.size.large}:has(> :is(${container.classNames.variants.size.xxl})) > *`,
+  `${sizeLarge}:has(> :is(${sizeXxl})) > *`,
   {
     maxInlineSize: "100%",
   },

@@ -3,23 +3,23 @@ import { fluid } from "@styles/utils/utils";
 import { color } from "@theme";
 import { createVar, style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
-import { container } from "~/styles/container/index.css";
-//import { textRecipe, textSprinkles } from "@recipe";
+
 const overlaping = createVar({
   syntax: "<length>",
   inherits: false,
   initialValue: "250px",
 });
+
 export const overlay = style({
   backgroundImage: `linear-gradient(to bottom, ${color.variable.whiteBlue} ${overlaping}, ${color.variable.darkLight} ${overlaping})`,
   borderImageSlice: "fill 1",
 });
+
 export const sectionWrapper = style([
-  container({ hover: false, theme: "accent", display: "block", size: "full" }),
   overlay,
   {
     blockSize: 600,
-    aspectRatio: "21/9s",
+    aspectRatio: "21/9",
     "@media": {
       [media.mobile]: {
         blockSize: "349px",
@@ -42,10 +42,10 @@ export const sectionWrapper = style([
     },
   },
 ]);
-export const menBG = createVar();
-export const wrapper = style([
-  container({ size: "medium", background: false }),
 
+export const menBG = createVar();
+
+export const wrapper = style([
   {
     clipPath: "inset(0 round 50px)",
     paddingBlock: fluid(5, 40),
@@ -53,10 +53,9 @@ export const wrapper = style([
     inlineSize: "100%",
     backgroundImage: menBG,
     display: "grid",
-    placeItems: "center !important",
+    placeItems: "center",
     transition: "border-image 4s ease-in-out 1s",
     backgroundAttachment: "fixed",
-
     backgroundPosition: "bottom",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",

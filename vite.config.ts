@@ -28,7 +28,8 @@ export default defineConfig(({ command, mode }): UserConfig => {
       qwikCity(),
       qwikVite(),
       vanillaExtractPlugin({
-        identifiers: mode === "production" ? "short" : "debug",
+        identifiers: "short",
+        
       }),
       tailwindcss(),
       tsconfigPaths({ root: "." }),

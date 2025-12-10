@@ -1,4 +1,4 @@
-import { container } from "@recipe";
+import { container } from "@container";
 import { media } from "@styles/token";
 import { fluid } from "@styles/utils/utils";
 import { color } from "@theme";
