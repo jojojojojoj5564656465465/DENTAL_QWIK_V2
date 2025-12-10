@@ -7,7 +7,7 @@ import {
   Diagnosis,
   Hero,
   How3,
-  //ImageFilter,
+  ImageFilter,
   Location,
   Specialisation,
   VanityMetrics,
@@ -19,7 +19,7 @@ export default component$(() => {
       <AboutUs />
       <Specialisation />
 
-      {/* <ImageFilter /> */}
+      <ImageFilter />
       <Avis />
       <DentistCard />
       <How3 />

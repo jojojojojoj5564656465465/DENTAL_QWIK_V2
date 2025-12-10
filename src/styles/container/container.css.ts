@@ -4,7 +4,6 @@ import { textSprinkles } from "@recipe";
 import { maxInlineSizeFn } from "../utils/base.css.ts";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
 
-
 const sizeSmall = style({});
 const sizeMedium = style({});
 const sizeLarge = style({});
@@ -145,7 +144,6 @@ export const container = recipe({
   },
 });
 
-
 globalStyle(
   `${sizeSmall}:has(> :is(${sizeMedium}, ${sizeLarge}, ${sizeXxl})) > *`,
   {
@@ -153,16 +151,10 @@ globalStyle(
   },
 );
 
-globalStyle(
-  `${sizeMedium}:has(> :is(${sizeLarge}, ${sizeXxl})) > *`,
-  {
-    maxInlineSize: "100%",
-  },
-);
+globalStyle(`${sizeMedium}:has(> :is(${sizeLarge}, ${sizeXxl})) > *`, {
+  maxInlineSize: "100%",
+});
 
-globalStyle(
-  `${sizeLarge}:has(> :is(${sizeXxl})) > *`,
-  {
-    maxInlineSize: "100%",
-  },
-);
+globalStyle(`${sizeLarge}:has(> :is(${sizeXxl})) > *`, {
+  maxInlineSize: "100%",
+});

@@ -6,6 +6,14 @@ import f from "../utils/fontFace.css.ts"; // Make sure these are exported font f
 import { theme } from "../utils/themeNew.css.ts"; // Make sure 'theme' structure matches usage (e.g., theme.primary or theme.colors.primary)
 
 const colorProperties = defineProperties({
+  conditions: {
+    lightMode: {
+      '@media': '(prefers-color-scheme: light)'
+    },
+    darkMode: { '@media': '(prefers-color-scheme: dark)' }
+  },
+  defaultCondition: ['lightMode', 'darkMode'],
+  responsiveArray: ['lightMode', 'darkMode'],
   properties: {
     color: theme,
     backgroundColor: theme,
@@ -169,7 +177,7 @@ const textProperties = defineProperties({
     textTransform: ["uppercase", "lowercase", "capitalize", "none", "inherit"],
     textDecoration: ["underline", "line-through", "none", "inherit"], // Could expand with 'overline' etc. if needed
     textDecorationColor: theme,
-    // textDecorationStyle: ['solid', 'dotted', 'dashed', 'wavy'], // Optional
+    textDecorationStyle: ["solid", "dotted", "dashed", "wavy"], // Optional
     // textDecorationThickness: ['auto', 'from-font', '1px', '2px'], // Optional
     textOverflow: ["clip", "ellipsis", "inherit"],
     whiteSpace: ["normal", "nowrap", "pre", "pre-wrap", "pre-line", "inherit"],

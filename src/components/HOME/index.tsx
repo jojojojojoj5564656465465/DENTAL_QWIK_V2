@@ -1,7 +1,7 @@
 import Hero from "./1-HERO";
 import AboutUs from "./2-aboutUs";
 import Specialisation from "./3-Specialisation";
-//import ImageFilter from "./4-imageFilter";
+import ImageFilter from "./4-imageFilter";
 import Avis from "./Avis";
 import DentistCard from "./Dentist-Card";
 import Diagnosis from "./Diagnosis";
@@ -13,7 +13,7 @@ export {
   Hero,
   AboutUs,
   Specialisation,
-  //ImageFilter,
+  ImageFilter,
   Avis,
   DentistCard,
   Diagnosis,
