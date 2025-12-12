@@ -1,6 +1,6 @@
 import Icon from "@Icon"; // Vérifie la compatibilité avec Qwik ou utilise @qwikest/icons
 import { component$ } from "@builder.io/qwik";
-import { container } from "~/styles/container/index.css"; // Assure-toi que cette bibliothèque est compatible avec Qwik
+import { container } from "@container"; // Assure-toi que cette bibliothèque est compatible avec Qwik
 import * as s from "./hero.css";
 
 // Sous-composant pour chaque élément du banner
@@ -22,12 +22,9 @@ const BannerItem = component$<{
 export default component$(() => {
   return (
     <section
-      class={container({
+      class={container.parent({
         theme: "darkBlueBanner",
         background: true,
-        size: "full",
-        //marginInline: "auto",
-        display: "grid",
       })}
     >
       <div class={s.bannerWrapper}>

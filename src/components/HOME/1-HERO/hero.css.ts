@@ -6,7 +6,7 @@ import { style } from "@vanilla-extract/css";
 import { container } from "~/styles/container/index.css";
 
 export const wrapper = style([
-  container({ size: "small" }),
+  container.child({ size: "small" }),
   {
     borderImage:
       "linear-gradient(oklch(58.09% 0.1151 235.69 / 40%), oklch(97.44% 0.0134 240.95) / 20% ) fill 1",
@@ -25,7 +25,7 @@ export const hr = style([
  * MARK: BANNER
  */
 export const bannerWrapper = style([
-  container({ size: "large", background: true }),
+  container.child({ size: "large", background: true }),
   flex({
     direction: "row",
     side: 4,

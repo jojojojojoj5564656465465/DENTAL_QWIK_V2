@@ -24,10 +24,9 @@ export const CardStyle = styleVariants({
     inlineSize: 55,
   },
   wrapper: [
-    container({
+    container.child({
       background: true,
       hover: true,
-      theme: "whiteBg",
       size: "large",
     }),
     flex({ direction: "column", gap: "xxs", side: 1 }),

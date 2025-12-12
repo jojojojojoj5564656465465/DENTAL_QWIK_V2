@@ -1,13 +1,16 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { containerNew as container } from "@/styles/container/containerNew.css.ts";
+import { container } from "@/styles/container/containerNew.css.ts";
 
 export default component$(() => {
   return (
-    <section
-      class={container.parent({ background: false, theme: "accent" })}
-    >
-      <div class={[container.child({ size: "small" }), "text-red-800"]}>
+    <section class={container.parent({ background: false, theme: "accent" })}>
+      <div
+        class={[
+          container.child({ size: "small", display: "grid" }),
+          "text-red-800",
+        ]}
+      >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
         neque omnis natus, culpa possimus minima ab saepe. Voluptatem sit
         voluptate assumenda, cupiditate quidem optio aliquid voluptatibus iste
@@ -20,7 +23,16 @@ export default component$(() => {
         consectetur eius ea in ab quidem magnam. Quasi alias dolor, quae soluta
         autem fugit sapiente id omnis illo. Asperiores?
       </div>
-      <div class={[container.child({ size: "small", marginBlock: 'md', background: false }), "text-green-800"]}>
+      <div
+        class={[
+          container.child({
+            size: "small",
+            marginBlock: "md",
+            background: false,
+          }),
+          "text-green-800",
+        ]}
+      >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit eos dolore
         quae eveniet velit error dolor quaerat quibusdam commodi soluta ducimus
         id assumenda rerum labore laborum, cum suscipit corrupti nostrum

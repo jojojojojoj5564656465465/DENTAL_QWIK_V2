@@ -8,7 +8,9 @@ import * as s from "./hero.css";
 
 export default component$(() => {
   return (
-    <section class={container({ theme: "darkBlueBanner", background: true })}>
+    <section
+      class={container.parent({ theme: "darkBlueBanner", background: true })}
+    >
       <div class={s.wrapper}>
         <h3
           class={textRecipe({

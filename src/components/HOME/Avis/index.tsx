@@ -114,7 +114,9 @@ const TestimonialSection = component$(() => {
     }),
   );
   return (
-    <section class="testimonial-section">
+    <section
+      class={[container.child({ size: "medium" }), "testimonial-section"]}
+    >
       {/* Partie gauche - Image et Note */}
       <Testimonialleft note={note.value} />
 
@@ -186,11 +188,11 @@ const TestimonialSection = component$(() => {
 export default component$(() => {
   return (
     <section
-      class={container({
-        size: "medium",
+      class={container.parent({
         theme: "darkBlueBanner",
         paddingBlock: "md",
         marginBlock: "md",
+        background: false,
       })}
     >
       <TestimonialSection />

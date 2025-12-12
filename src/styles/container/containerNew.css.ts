@@ -3,7 +3,6 @@ import { recipe } from "@vanilla-extract/recipes";
 import { textSprinkles } from "@recipe";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
 import { containerSize } from "../utils/base.css.ts";
-import { calc } from "@vanilla-extract/css-utils"; // Import calc utility
 
 const paddingBlock = {
   sm: textSprinkles({ marginBlock: "sm" }),
@@ -25,6 +24,9 @@ const parent = recipe({
   base: {
     position: "relative",
     display: "block",
+    color: theme.text,
+    isolation: "isolate",
+    marginInline: "auto",
   },
   variants: {
     theme: {
@@ -53,6 +55,7 @@ const parent = recipe({
   ],
   defaultVariants: {
     background: true,
+    theme: "blueLightBg",
   },
 });
 
@@ -65,17 +68,12 @@ const sizeVar = styleVariants(containerSize, (length, key) => {
   // Détermine la valeur de `maxInlineSize` en fonction de la clé.
   // Si la clé est "full", on utilise "none" pour désactiver la contrainte de taille.
   // Sinon, on calcule une taille responsive avec `clamp` et `min`.
-  // const maxInlineSizeValue =
-  //   key === "full"
-  //     ? "none"
-  //     : `min(calc(100% - clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem) * 2), ${length})`;
 
-  const calcExpression = calc("100%")
-    .subtract(calc.multiply("clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem)", 2))
-    .toString();
-  
   const maxInlineSizeValue =
-    key === "full" ? "none" : `min(${calcExpression}, ${length})`;
+    key === "full"
+      ? "none"
+      : `min(calc(100% - clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem) * 2), ${length})`;
+
   return {
     selectors: {
       // Applique les styles uniquement lorsque le composant est un enfant direct de `parent`.
@@ -90,7 +88,7 @@ const sizeVar = styleVariants(containerSize, (length, key) => {
 });
 const child = recipe({
   base: {
-    display: "block",
+    // display: "block",
     marginInline: "auto",
   },
   variants: {
@@ -127,6 +125,14 @@ const child = recipe({
       },
     },
     size: sizeVar,
+    display: {
+      block: { display: "block" },
+      grid: { display: "grid" },
+      flex: { display: "flex" },
+      inlineBlock: { display: "inline-block" },
+      inlineFlex: { display: "inline-flex" },
+      inlineGrid: { display: "inline-grid" },
+    },
   },
   compoundVariants: [
     {
@@ -144,7 +150,7 @@ const child = recipe({
   },
 });
 
-export const containerNew = {
+export const container = {
   parent,
   child,
 };

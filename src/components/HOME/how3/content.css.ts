@@ -9,7 +9,6 @@ import {
 } from "@vanilla-extract/css";
 import { createBorderImage, fluid } from "@/styles/utils";
 import { color } from "@/styles/utils/themeNew.css.ts";
-import { container } from "~/styles/container/index.css";
 
 // Animation pour le changement de couleur progressif
 const changeColor = keyframes({
@@ -55,7 +54,7 @@ export const bgImage = style({
 
 // Wrapper principal pour chaque élément de liste
 export const liWrapper = style([
-  container({ background: true, theme: "whiteLD" }),
+  //container({ background: true, theme: "whiteLD" }),
   {
     border: "2px solid oklch(0.8 0.0345 261.53)",
     borderRadius: "5px",

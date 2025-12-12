@@ -7,13 +7,11 @@ import ImageSide from "./ImageSide";
 // Composant principal
 export default component$(() => {
   return (
-    <section
-      class={container({ theme: "blueLightBg", hover: false, size: "medium" })}
-    >
-      <section class={wrapperIndex}>
+    <section class={container.parent({ theme: "blueLightBg" })}>
+      <div class={wrapperIndex}>
         <ImageSide />
         <Content />
-      </section>
+      </div>
     </section>
   );
 });

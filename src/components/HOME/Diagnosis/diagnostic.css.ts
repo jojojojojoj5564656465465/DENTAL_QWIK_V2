@@ -15,7 +15,7 @@ export const sectionContainerIndex = style([
     marginBlock: space.md,
     textAlign: "center",
   },
-  container({ size: "large", theme: "blueLightBg" }),
+  container.parent({ theme: "blueLightBg" }),
 ]);
 export const sectionContainer__Text = styleVariants({
   wrapper: { marginBlock: fluid(20, 45) },
