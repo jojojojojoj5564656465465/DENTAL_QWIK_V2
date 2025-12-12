@@ -15,6 +15,7 @@ export const containerSize = {
   medium: "72rem",
   small: "60rem",
   xxl: "120rem",
+  "100%": "100%",
 } as const;
 
 export const maxInlineSizeFn = (x: keyof typeof containerSize): string => {

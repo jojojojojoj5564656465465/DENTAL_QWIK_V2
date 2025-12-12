@@ -1,20 +1,29 @@
-import { fallbackVar, globalStyle, style } from "@vanilla-extract/css";
+import { fallbackVar, globalStyle, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { textSprinkles } from "@recipe";
-import { maxInlineSizeFn } from "../utils/base.css.ts";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
+import { containerSize, maxInlineSizeFn } from "../utils/base.css.ts";
 
-const sizeSmall = style({});
-const sizeMedium = style({});
-const sizeLarge = style({});
-const sizeXxl = style({});
+const sizeVariants = styleVariants(containerSize, (_, key) => {
+  if (key === "full") {
+    return {
+      maxInlineSize: "none",
+      inlineSize: "100svw",
+      marginInline: "none",
+    };
+  }
+  return {
+    maxInlineSize: maxInlineSizeFn(key),
+  };
+});
 
 export const container = recipe({
   base: {
     position: "relative",
     boxSizing: "border-box",
     color: theme.text,
-
+    isolation: "isolate",
+    marginInline: "auto",
   },
   variants: {
     theme: {
@@ -28,16 +37,16 @@ export const container = recipe({
       inlineFlex: { display: "inline-flex" },
       inlineGrid: { display: "inline-grid" },
     },
-    marginInline: {
-      auto: { marginInline: "auto" },
-      none: { marginInline: "none" },
-      sm: textSprinkles({ marginInline: "sm" }),
-      md: textSprinkles({ marginInline: "md" }),
-      lg: textSprinkles({ marginInline: "lg" }),
-      xl: textSprinkles({ marginInline: "xl" }),
-      xxl: textSprinkles({ marginInline: "xxl" }),
-      xxxl: textSprinkles({ marginInline: "xxxl" }),
-    },
+    // marginInline: {
+    //   auto: { marginInline: "auto" },
+    //   none: { marginInline: "none" },
+    //   sm: textSprinkles({ marginInline: "sm" }),
+    //   md: textSprinkles({ marginInline: "md" }),
+    //   lg: textSprinkles({ marginInline: "lg" }),
+    //   xl: textSprinkles({ marginInline: "xl" }),
+    //   xxl: textSprinkles({ marginInline: "xxl" }),
+    //   xxxl: textSprinkles({ marginInline: "xxxl" }),
+    // },
     marginBlock: {
       sm: textSprinkles({ marginBlock: "sm" }),
       md: textSprinkles({ marginBlock: "md" }),
@@ -57,35 +66,24 @@ export const container = recipe({
     hover: {
       true: {
         cursor: "pointer",
-        ":active": {
-          color: fallbackVar(theme.textHover, "inherit"),
-          backgroundColor: fallbackVar(theme.backgroundHover, "inherit"),
-          outline: `min(4px, 3px + 0.1vw) solid ${theme.backgroundHover}`,
-          outlineOffset: "1.6px",
-        },
-        ":focus": {
-          outline: "min(4px, 3px + 0.1vw) solid yellow",
-          outlineOffset: "4px",
-        },
-        "@supports": {
-          "selector(:hover)": {
-            ":hover": {
-              backgroundColor: fallbackVar(
-                theme.backgroundHover,
-                theme.background,
-              ),
-              color: fallbackVar(theme.textHover, theme.text, "inherit"),
-              borderColor: fallbackVar(theme.textHover, "inherit"),
-            },
+        selectors: {
+          "&:active": {
+            color: fallbackVar(theme.textHover, "inherit"),
+            backgroundColor: fallbackVar(theme.backgroundHover, "inherit"),
+            outline: `min(4px, 3px + 0.1vw) solid ${theme.backgroundHover}`,
+            outlineOffset: "1.6px",
           },
-          "not selector(:hover)": {
-            ":active": {
-              color: fallbackVar(theme.textHover, "inherit"),
-              backgroundColor: fallbackVar(theme.backgroundHover, "inherit"),
-              transform: "scale(1.03)",
-              outline: `min(4px, 3px + 0.1vw) solid ${theme.backgroundHover}`,
-              outlineOffset: "1.6px",
-            },
+          "&:focus": {
+            outline: "min(4px, 3px + 0.1vw) solid yellow",
+            outlineOffset: "4px",
+          },
+          "&:hover": {
+            backgroundColor: fallbackVar(
+              theme.backgroundHover,
+              theme.background,
+            ),
+            color: fallbackVar(theme.textHover, theme.text, "inherit"),
+            borderColor: fallbackVar(theme.textHover, "inherit"),
           },
         },
       },
@@ -95,36 +93,7 @@ export const container = recipe({
         backgroundColor: theme.background,
       },
     },
-    size: {
-      small: [
-        sizeSmall,
-        {
-          maxInlineSize: maxInlineSizeFn("small"),
-        },
-      ],
-      medium: [
-        sizeMedium,
-        {
-          maxInlineSize: maxInlineSizeFn("medium"),
-        },
-      ],
-      large: [
-        sizeLarge,
-        {
-          maxInlineSize: maxInlineSizeFn("large"),
-        },
-      ],
-      xxl: [
-        sizeXxl,
-        {
-          maxInlineSize: maxInlineSizeFn("xxl"),
-        },
-      ],
-      full: {
-        maxInlineSize: "none",
-        //marginInline: 'calc(50% - 50vw)',
-      },
-    },
+    size: sizeVariants,
   },
   compoundVariants: [
     {
@@ -137,35 +106,41 @@ export const container = recipe({
         borderRadius: "10px",
         textAlign: "center",
       },
-    }, {
+    },
+    {
       variants: {
         size: "full",
-        marginInline: 'none'
       },
       style: {
         inlineSize: "100svw",
-      }
-    }
+      },
+    },
   ],
   defaultVariants: {
     hover: false,
     background: true,
-    size: "full",
-    marginInline: "auto", 
+    //size: "full",
+    //marginInline: "auto",
   },
 });
 
+// Global styles for nested containers
+// Using sizeVariants directly as selectors
+
 globalStyle(
-  `${sizeSmall}:has(> :is(${sizeMedium}, ${sizeLarge}, ${sizeXxl})) > *`,
+  `${sizeVariants.small}:has(> :is(${sizeVariants.medium}, ${sizeVariants.large}, ${sizeVariants.xxl})) > *`,
   {
     maxInlineSize: "100%",
   },
 );
 
-globalStyle(`${sizeMedium}:has(> :is(${sizeLarge}, ${sizeXxl})) > *`, {
-  maxInlineSize: "100%",
-});
+globalStyle(
+  `${sizeVariants.medium}:has(> :is(${sizeVariants.large}, ${sizeVariants.xxl})) > *`,
+  {
+    maxInlineSize: "100%",
+  },
+);
 
-globalStyle(`${sizeLarge}:has(> :is(${sizeXxl})) > *`, {
+globalStyle(`${sizeVariants.large}:has(> :is(${sizeVariants.xxl})) > *`, {
   maxInlineSize: "100%",
 });

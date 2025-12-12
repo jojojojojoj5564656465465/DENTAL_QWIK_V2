@@ -5,7 +5,13 @@ import { color } from "@theme";
 import { globalStyle, style, styleVariants } from "@vanilla-extract/css";
 
 export const cardsWrapper = style([
-  containerGrid({ background: false, cols: 4, gap: true, size: "medium" }),
+  containerGrid({
+    background: false,
+    cols: 4,
+    gap: true,
+    size: "medium",
+    fullSize: "large",
+  }),
   {
     marginBlock: space.lg,
   },
@@ -18,8 +24,14 @@ export const CardStyle = styleVariants({
     inlineSize: 55,
   },
   wrapper: [
-    container({ background: true, hover: true, theme: "whiteBg" }),
+    container({
+      background: true,
+      hover: true,
+      theme: "whiteBg",
+      size: "large",
+    }),
     flex({ direction: "column", gap: "xxs", side: 1 }),
+
     {
       ":before": {
         backgroundColor: color.variable.accent,

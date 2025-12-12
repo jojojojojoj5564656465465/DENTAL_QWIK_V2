@@ -8,12 +8,12 @@ import { theme } from "../utils/themeNew.css.ts"; // Make sure 'theme' structure
 const colorProperties = defineProperties({
   conditions: {
     lightMode: {
-      '@media': '(prefers-color-scheme: light)'
+      "@media": "(prefers-color-scheme: light)",
     },
-    darkMode: { '@media': '(prefers-color-scheme: dark)' }
+    darkMode: { "@media": "(prefers-color-scheme: dark)" },
   },
-  defaultCondition: ['lightMode', 'darkMode'],
-  responsiveArray: ['lightMode', 'darkMode'],
+  defaultCondition: ["lightMode", "darkMode"],
+  responsiveArray: ["lightMode", "darkMode"],
   properties: {
     color: theme,
     backgroundColor: theme,

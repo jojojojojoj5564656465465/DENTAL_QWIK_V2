@@ -26,7 +26,7 @@ export default component$(() => {
         theme: "darkBlueBanner",
         background: true,
         size: "full",
-        marginInline: "auto",
+        //marginInline: "auto",
         display: "grid",
       })}
     >
