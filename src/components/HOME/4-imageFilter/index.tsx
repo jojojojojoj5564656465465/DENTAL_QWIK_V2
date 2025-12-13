@@ -45,9 +45,7 @@ export default component$(() => {
           qualité et moins invasifs.
         </h5>
       </div>
-      <span class={s.overlay}>
-   
-      </span>
+      <span class={s.overlay}></span>
     </section>
   );
 });

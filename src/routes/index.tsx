@@ -1,20 +1,20 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { ImageFilter, Avis, AboutUs, DentistCard, How3, Specialisation, Hero,Diagnosis, Location, VanityMetrics } from "@/components/HOME/index";
+import { Diagnosis } from "@/components/HOME/index";
 export default component$(() => {
   return (
     <section>
-      <Hero />
-      <AboutUs />
-      <Specialisation />
+      {/* <Hero /> */}
+      {/* <AboutUs /> */}
+      {/* <Specialisation />
 
       <ImageFilter />
       <Avis />
       <DentistCard />
-      <How3 />
+      <How3 /> */}
       <Diagnosis />
-      <Location />
-      <VanityMetrics />
+      {/* <Location />
+      <VanityMetrics /> */}
     </section>
   );
 });

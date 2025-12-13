@@ -4,7 +4,6 @@ import { color } from "@theme";
 import { createVar, style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-
 // --- Variables ---
 const overlaping = createVar({
   syntax: "<length>",

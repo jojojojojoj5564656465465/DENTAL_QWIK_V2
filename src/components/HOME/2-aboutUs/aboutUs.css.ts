@@ -1,4 +1,4 @@
-import { containerGrid } from "@container";
+import { containerGrid, container } from "@container";
 import { textRecipe } from "@recipe";
 import { media, space } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
@@ -7,8 +7,13 @@ import { createVar, style, styleVariants } from "@vanilla-extract/css";
 /**
  * WRAPPER DE LA PAGE INDEX
  */
-export const wrapperIndex = style([
-  containerGrid({ cols: 2, size: "medium" }),
+export const childWrapper = style([
+  container.child({
+    background: false,
+    hover: false,
+    size: "medium",
+  }),
+  containerGrid({ cols: 2 }),
 
   {
     "@media": {

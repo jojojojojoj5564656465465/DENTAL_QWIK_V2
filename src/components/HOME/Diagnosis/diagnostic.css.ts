@@ -1,5 +1,5 @@
 import { textRecipe } from "@recipe";
-import { fontSize, media, space } from "@styles/token";
+import { fontSize, media } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
 import { color } from "@theme";
 import {
@@ -8,17 +8,18 @@ import {
   style,
   styleVariants,
 } from "@vanilla-extract/css";
-import { container, containerGrid } from "~/styles/container/index.css";
+
+import { container, containerGrid } from "@container";
 
 export const sectionContainerIndex = style([
+  textRecipe({ textAlign: "center" }),
   {
-    marginBlock: space.md,
-    textAlign: "center",
+    // textAlign: "center",
   },
-  container.parent({ theme: "blueLightBg" }),
+  container.parent({ theme: "blueLightBg", marginBlock: "md" }),
 ]);
 export const sectionContainer__Text = styleVariants({
-  wrapper: { marginBlock: fluid(20, 45) },
+  wrapper: [container.child({ size: "small", marginBlock: "sm" })],
   h6: [textRecipe({ font: "preTitle", textAlign: "center" })],
   h2: [textRecipe({ font: "title", textAlign: "center" })],
 });
@@ -50,7 +51,8 @@ export const gridContainer = style([
       },
     },
   },
-  containerGrid({ fullSize: "large", theme: "blueLightBg" }),
+  containerGrid({ theme: "blueLightBg" }),
+  container.child({ size: "large" }),
 ]);
 /**
  * MARK: card
@@ -104,6 +106,9 @@ const inside = style({
 export const element = style([
   {
     gridColumn: "2 / span 3",
+    inlineSize: "100%",
+    textAlign: "left",
+
     "@media": {
       [media.tablet]: {
         gridColumn: "2 / span 3",
@@ -209,10 +214,4 @@ export const image = style({
       backgroundPositionY: "center",
     },
   },
-});
-
-export const test = style({
-  height: "150px",
-  width: "150px",
-  //backgroundColor: "red",
 });

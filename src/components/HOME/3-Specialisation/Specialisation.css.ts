@@ -4,17 +4,22 @@ import { space } from "@styles/token";
 import { color } from "@theme";
 import { globalStyle, style, styleVariants } from "@vanilla-extract/css";
 
-export const cardsWrapper = style([
+export const parent = style([
+  container.parent({ background: false, marginBlock: "lg" }),
+]);
+export const child = style([
+  container.child({
+    background: false,
+    hover: false,
+    size: "medium",
+  }),
   containerGrid({
     background: false,
     cols: 4,
     gap: true,
-    size: "medium",
-    fullSize: "large",
+    //size: "medium",
+    //fullSize: "large",
   }),
-  {
-    marginBlock: space.lg,
-  },
 ]);
 
 export const CardStyle = styleVariants({

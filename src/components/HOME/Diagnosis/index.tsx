@@ -1,16 +1,10 @@
-//import Icon from "@Icon"; // Assure-toi que cette bibliothèque est compatible avec Qwik ou utilise une alternative comme @qwikest/icons
 import { component$ } from "@builder.io/qwik";
-//import Toothbrush from "@/assets/icons/toothbrush.svg?jsx";
 import ImageMiddle from "~/assets/why-choose-us-img.avif?jsx";
 import {
-  description,
-  element,
-  gridContainer,
-  image,
-  sectionContainer__Text,
   sectionContainerIndex,
-  title,
+  sectionContainer__Text,
 } from "./diagnostic.css";
+import * as G from "./grid.css.ts";
 
 interface Service {
   title: string;
@@ -36,7 +30,7 @@ const services: Service[] = [
   {
     title: "Malocclusion",
     description:
-      "Problèmes d’alignement des dents diagnostiqués par examen clinique et radiographies.",
+      "Problèmes d'alignement des dents diagnostiqués par examen clinique et radiographies.",
   },
   {
     title: "Maladies des tissus mous",
@@ -46,20 +40,29 @@ const services: Service[] = [
   {
     title: "Bruxisme",
     description:
-      "Grincement des dents diagnostiqué par examen des signes d’usure et questions sur les habitudes de sommeil.",
+      "Grincement des dents diagnostiqué par examen des signes d'usure et questions sur les habitudes de sommeil.",
   },
 ];
 
-const ItemDiagnostic = component$<Service>((props) => {
+const ItemDiagnostic = component$<Service & { class?: string }>((props) => {
   return (
-    <dl class={element}>
-      <dt class={title}>{props.title}</dt>
-      <dd class={description}>{props.description}</dd>
+    <dl class={`${G.elementVariants.parent} ${props.class || ""}`}>
+      <dt class={G.elementVariants.title}>{props.title}</dt>
+      <dd class={G.elementVariants.description}>{props.description}</dd>
     </dl>
   );
 });
 
 export default component$(() => {
+  const cardClasses = [
+    G.gridVariants.card1,
+    G.gridVariants.card2,
+    G.gridVariants.card3,
+    G.gridVariants.card4,
+    G.gridVariants.card5,
+    G.gridVariants.card6,
+  ];
+
   return (
     <section class={sectionContainerIndex}>
       <div class={sectionContainer__Text.wrapper}>
@@ -69,11 +72,16 @@ export default component$(() => {
         </h2>
         <p>Nous avons une vaste palette d'expertises pour votre santé</p>
       </div>
-      <section class={gridContainer}>
-        <ImageMiddle class={image} alt="Image illustrative" />
-        {services.map((service) => (
-          <ItemDiagnostic {...service} key={service.title} />
+
+      <section class={G.gridVariants.child}>
+        {services.map((service, index) => (
+          <ItemDiagnostic
+            {...service}
+            key={service.title}
+            class={cardClasses[index]}
+          />
         ))}
+        <ImageMiddle class={G.gridVariants.img} alt="Image illustrative" />
       </section>
     </section>
   );

@@ -3,6 +3,7 @@ import { recipe } from "@vanilla-extract/recipes";
 import { textSprinkles } from "@recipe";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
 import { containerSize } from "../utils/base.css.ts";
+import { defaultContainer } from "@/styles/utils/base.css.ts";
 
 const paddingBlock = {
   sm: textSprinkles({ marginBlock: "sm" }),
@@ -20,14 +21,9 @@ const marginBlock = {
   xxl: textSprinkles({ marginBlock: "xxl" }),
   xxxl: textSprinkles({ marginBlock: "xxxl" }),
 };
+
 const parent = recipe({
-  base: {
-    position: "relative",
-    display: "block",
-    color: theme.text,
-    isolation: "isolate",
-    marginInline: "auto",
-  },
+  base: defaultContainer,
   variants: {
     theme: {
       ...colorTheme,

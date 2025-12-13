@@ -8,8 +8,8 @@ import {
 } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { media } from "../token";
-import { defaultContainer } from "../utils/base.css";
-import { containerSize, maxInlineSizeFn } from "../utils/base.css.ts";
+import { defaultContainer, maxInlineSizeFn } from "../utils/base.css";
+import { containerSize } from "../utils/base.css.ts";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
 import { fluid } from "../utils/utils.ts";
 
@@ -55,7 +55,7 @@ const numberOfColumnTheme = style({
   },
 });
 
-const containerGridVariant = styleVariants(containerSize, (size) => [
+const _containerGridVariant = styleVariants(containerSize, (size) => [
   gridWrapper,
   numberOfColumnTheme,
   {
@@ -66,7 +66,6 @@ export const containerGrid = recipe({
   base: [
     defaultContainer,
     {
-      marginInline: "auto",
       display: "grid",
     },
   ],
@@ -123,13 +122,13 @@ export const containerGrid = recipe({
         },
       },
     },
-    fullSize: {
-      small: [containerGridVariant.small],
-      medium: [containerGridVariant.medium],
-      large: [containerGridVariant.large],
-      xxl: [containerGridVariant.xxl],
-      full: [containerGridVariant.full],
-    },
+    // fullSize: {
+    //   small: [containerGridVariant.small],
+    //   medium: [containerGridVariant.medium],
+    //   large: [containerGridVariant.large],
+    //   xxl: [containerGridVariant.xxl],
+    //   full: [containerGridVariant.full],
+    // },
     theme: {
       ...colorTheme,
     },

@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { container } from "~/styles/container/index.css.ts";
-import { wrapperIndex } from "./aboutUs.css";
+import { childWrapper } from "./aboutUs.css";
 import Content from "./content.tsx";
 import ImageSide from "./ImageSide";
 
@@ -8,7 +8,7 @@ import ImageSide from "./ImageSide";
 export default component$(() => {
   return (
     <section class={container.parent({ theme: "blueLightBg" })}>
-      <div class={wrapperIndex}>
+      <div class={childWrapper}>
         <ImageSide />
         <Content />
       </div>

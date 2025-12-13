@@ -17,7 +17,7 @@ const sizeVariants = styleVariants(containerSize, (_, key) => {
   };
 });
 
-export const container = recipe({
+const _container = recipe({
   base: {
     position: "relative",
     boxSizing: "border-box",
