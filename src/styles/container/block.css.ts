@@ -6,42 +6,21 @@ import { colorTheme, theme } from "../utils/themeNew.css.ts";
 
 import { textSprinkles } from "./textSprinkles.css";
 
-const paddingBlock = {
-  sm: textSprinkles({ paddingBlock: "sm" }),
-  md: textSprinkles({ paddingBlock: "md" }),
-  lg: textSprinkles({ paddingBlock: "lg" }),
-  xl: textSprinkles({ paddingBlock: "xl" }),
-  xxl: textSprinkles({ paddingBlock: "xxl" }),
-  xxxl: textSprinkles({ paddingBlock: "xxxl" }),
-};
-const marginBlock = {
-  sm: textSprinkles({ marginBlock: "sm" }),
-  md: textSprinkles({ marginBlock: "md" }),
-  lg: textSprinkles({ marginBlock: "lg" }),
-  xl: textSprinkles({ marginBlock: "xl" }),
-  xxl: textSprinkles({ marginBlock: "xxl" }),
-  xxxl: textSprinkles({ marginBlock: "xxxl" }),
-  auto: textSprinkles({ marginBlock: "auto" }),
-};
-const marginBlockStart = {
-  sm: textSprinkles({ marginBlockStart: "sm" }),
-  md: textSprinkles({ marginBlockStart: "md" }),
-  lg: textSprinkles({ marginBlockStart: "lg" }),
-  xl: textSprinkles({ marginBlockStart: "xl" }),
-  xxl: textSprinkles({ marginBlockStart: "xxl" }),
-  xxxl: textSprinkles({ marginBlockStart: "xxxl" }),
-  auto: textSprinkles({ marginBlockStart: "auto" }),
-};
+const spacingVariant = (property: keyof Parameters<typeof textSprinkles>[0]) =>
+  ({
+    sm: textSprinkles({ [property]: "sm" }),
+    md: textSprinkles({ [property]: "md" }),
+    lg: textSprinkles({ [property]: "lg" }),
+    xl: textSprinkles({ [property]: "xl" }),
+    xxl: textSprinkles({ [property]: "xxl" }),
+    xxxl: textSprinkles({ [property]: "xxxl" }),
+    auto: textSprinkles({ [property]: "auto" }),
+  }) as const;
 
-const marginBlockEnd = {
-  sm: textSprinkles({ marginBlockEnd: "sm" }),
-  md: textSprinkles({ marginBlockEnd: "md" }),
-  lg: textSprinkles({ marginBlockEnd: "lg" }),
-  xl: textSprinkles({ marginBlockEnd: "xl" }),
-  xxl: textSprinkles({ marginBlockEnd: "xxl" }),
-  xxxl: textSprinkles({ marginBlockEnd: "xxxl" }),
-  auto: textSprinkles({ marginBlockEnd: "auto" }),
-};
+const paddingBlock = spacingVariant("paddingBlock");
+const marginBlock = spacingVariant("marginBlock");
+const marginBlockStart = spacingVariant("marginBlockStart");
+const marginBlockEnd = spacingVariant("marginBlockEnd");
 
 const sizeContainer = {
   small: "60rem",

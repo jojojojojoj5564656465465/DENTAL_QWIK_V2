@@ -1,0 +1,5 @@
+[revset-aliases]
+'push()' = 'bookmarks()'
+
+[git]
+auto-local-bookmark = true
