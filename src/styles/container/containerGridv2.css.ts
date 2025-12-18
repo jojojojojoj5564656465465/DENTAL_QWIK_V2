@@ -1,24 +1,74 @@
-import { createVar, fallbackVar, styleVariants } from "@vanilla-extract/css";
+import {
+  createVar,
+  fallbackVar,
+  styleVariants,
+  style,
+  assignVars,
+  createThemeContract,
+} from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { defaultContainer } from "../utils/base.css";
 import { colorTheme, theme } from "../utils/themeNew.css";
 import { media, space } from "../token";
 import { calc } from "@vanilla-extract/css-utils";
+import { fluid } from "../utils/utils.ts";
+import { containerSize } from "../utils/base.css.ts";
+
+import { textSprinkles } from "@/styles/recipe/textSprinkles.css";
 const gridMinColSize = createVar({
   syntax: "<length-percentage>",
   inherits: false,
   initialValue: "100%",
 });
+/**
+ * MARK:FULL BLEED GRID VARS
+ */
+const vars = createThemeContract({
+  col: null,
+});
 
-const sizeContainer = {
-  small: "60rem",
-  medium: "72rem",
-  large: "90rem",
-  full: "none",
-  xxl: "120rem",
-} as const;
+const numberOfColumnVars = style({
+  //gridTemplateAreas: '"left . . right"',
+  vars: assignVars(vars, {
+    col: "3",
+  }),
+  "@media": {
+    [media.tablet]: {
+      //gridTemplateAreas: '"left . . . . . right"',
+      vars: assignVars(vars, {
+        col: "6",
+      }),
+    },
+    [media.md]: {
+      //gridTemplateAreas: '"left . . . . . . . . . . . . right"',
+      vars: assignVars(vars, {
+        col: "12",
+      }),
+    },
+  },
+});
 
-export const sizeVariants = styleVariants(sizeContainer, (length, key) => {
+const { "100%": _, full: __, ...rest } = containerSize;
+const gridGap = createVar({
+  syntax: "<length>",
+  inherits: false,
+  initialValue: "0rem",
+});
+/*
+ * @description Variant pour les tailles de container en mode grid fullBleed
+ */
+const containerGridVariant = styleVariants(rest, (size) => [
+  numberOfColumnVars,
+  {
+    gridTemplateColumns: `[left] 1fr [content-start] repeat(${vars.col}, calc((min(${calc.subtract("100%", fluid(40, 80))}, ${size ?? "60rem"}) - calc((${vars.col} - 1) * ${fallbackVar(gridGap, "0.1px")})) / ${vars.col})) [content-end] 1fr [right]`,
+    gap: gridGap,
+  },
+]);
+
+/**
+ * MARK: CLASSIQUE VARIANTS
+ */
+export const sizeVariants = styleVariants(containerSize, (length, key) => {
   const maxInlineSizeValue =
     key === "full"
       ? "none"
@@ -26,6 +76,7 @@ export const sizeVariants = styleVariants(sizeContainer, (length, key) => {
 
   return {
     maxInlineSize: maxInlineSizeValue,
+    gridTemplateColumns: `repeat(auto-fill, ${calc.subtract(gridMinColSize, fallbackVar(gridGap, "0rem"))})`,
   };
 });
 
@@ -37,7 +88,7 @@ const NbColObj = {
   8: { tablet: 4, md: 8 },
   10: { tablet: 5, md: 10 },
   12: { tablet: 6, md: 12 },
-} as const;
+} as const satisfies Record<number, { tablet: number; md: number }>;
 
 // CORRECTION : Simplification de la structure
 const numberOfColumns = styleVariants(NbColObj, (mediaQuery) => ({
@@ -58,11 +109,9 @@ const numberOfColumns = styleVariants(NbColObj, (mediaQuery) => ({
   },
 }));
 
-const gridGap = createVar({
-  syntax: "<length>",
-  inherits: false,
-  initialValue: "0rem",
-});
+/**
+ * @description Variant pour les tailles de container en mode grid fullBleed
+ */
 
 const gapVar = styleVariants(space, (length) => ({
   gap: length,
@@ -70,22 +119,38 @@ const gapVar = styleVariants(space, (length) => ({
     [gridGap]: length,
   },
 }));
+const spacingVariant = (property: keyof Parameters<typeof textSprinkles>[0]) =>
+  ({
+    sm: textSprinkles({ [property]: "sm" }),
+    md: textSprinkles({ [property]: "md" }),
+    lg: textSprinkles({ [property]: "lg" }),
+    xl: textSprinkles({ [property]: "xl" }),
+    xxl: textSprinkles({ [property]: "xxl" }),
+    xxxl: textSprinkles({ [property]: "xxxl" }),
+    auto: textSprinkles({ [property]: "auto" }),
+  }) as const;
 
+const paddingBlock = spacingVariant("paddingBlock");
+const marginBlock = spacingVariant("marginBlock");
+const marginBlockStart = spacingVariant("marginBlockStart");
+const marginBlockEnd = spacingVariant("marginBlockEnd");
 export default recipe({
   base: [
     defaultContainer,
     {
-      gridTemplateColumns: `repeat(auto-fill, ${calc.subtract(gridMinColSize, fallbackVar(gridGap, "0rem"))})`,
       gridAutoFlow: "row",
       marginInline: "auto",
-      gap: gridGap,
+      display: "grid",
     },
   ],
   variants: {
     theme: {
       ...colorTheme,
     },
-
+    marginBlock,
+    marginBlockStart,
+    marginBlockEnd,
+    paddingBlock,
     hover: {
       true: {
         cursor: "pointer",
@@ -128,17 +193,12 @@ export default recipe({
       },
     },
     size: sizeVariants,
+    fullbleed: containerGridVariant,
     numberColumn: numberOfColumns,
     gap: gapVar,
-    display: {
-      grid: { display: "grid" },
-      inlineGrid: { display: "inline-grid" },
-    },
   },
   defaultVariants: {
-    display: "grid",
     hover: false,
     background: true,
-    size: "full",
   },
 });

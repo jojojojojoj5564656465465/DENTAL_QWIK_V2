@@ -23,9 +23,6 @@ const gridGap = createVar({
   initialValue: "1rem",
 });
 
-/**
- * @deprecated
- */
 export const containerGridMaxColumn = recipe({
   base: [
     defaultContainer,

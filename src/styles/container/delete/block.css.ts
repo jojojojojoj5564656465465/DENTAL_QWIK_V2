@@ -1,10 +1,10 @@
 import { recipe } from "@vanilla-extract/recipes";
 import { fallbackVar, style, styleVariants } from "@vanilla-extract/css";
-import { space } from "../token";
+import { space } from "../../token/index.ts";
 //import { defaultContainer } from "../utils/base.css";
-import { colorTheme, theme } from "../utils/themeNew.css.ts";
+import { colorTheme, theme } from "../../utils/themeNew.css.ts";
 
-import { textSprinkles } from "./textSprinkles.css";
+import { textSprinkles } from "@/styles/recipe/textSprinkles.css.ts";
 
 const spacingVariant = (property: keyof Parameters<typeof textSprinkles>[0]) =>
   ({

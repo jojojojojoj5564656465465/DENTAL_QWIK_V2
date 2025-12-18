@@ -1,3 +1,12 @@
+import {
+  fallbackVar,
+  style,
+  styleVariants,
+  globalStyle,
+} from "@vanilla-extract/css";
+
+import { textSprinkles } from ".././textSprinkles.css";
+
 const spacingVariant = (property: keyof Parameters<typeof textSprinkles>[0]) =>
   ({
     sm: textSprinkles({ [property]: "sm" }),
@@ -20,7 +29,7 @@ const sizeContainer = {
   large: "90rem",
   full: "none",
   xxl: "120rem",
-} as const;
+} as const satisfies Record<string, string>;
 
 export const sizeVariants = styleVariants(sizeContainer, (length, key) => {
   const maxInlineSizeValue =
@@ -29,6 +38,31 @@ export const sizeVariants = styleVariants(sizeContainer, (length, key) => {
       : `min(calc(100% - clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem) * 2), ${length})`;
 
   return {
-    maxInlineSize: maxInlineSizeValue,
+    maxInlineSize: fallbackVar(maxInlineSizeValue, "100%"),
   };
+});
+export const defaultContainer = style({
+  marginInline: "auto",
+  boxSizing: "border-box",
+  position: "relative",
+  isolation: "isolate",
+  caretColor: "transparent",
+});
+
+globalStyle(
+  `${sizeVariants.small}:has(> :is(${sizeVariants.medium}, ${sizeVariants.large}, ${sizeVariants.xxl})) > *`,
+  {
+    maxInlineSize: "100%",
+  },
+);
+
+globalStyle(
+  `${sizeVariants.medium}:has(> :is(${sizeVariants.large}, ${sizeVariants.xxl})) > *`,
+  {
+    maxInlineSize: "100%",
+  },
+);
+
+globalStyle(`${sizeVariants.large}:has(> :is(${sizeVariants.xxl})) > *`, {
+  maxInlineSize: "100%",
 });

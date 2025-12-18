@@ -187,4 +187,5 @@ export const flex = recipe({
     side: 1,
     wrap: false,
   },
+  compoundVariants: [],
 });
