@@ -3,17 +3,29 @@ import { media, space } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
 import { color } from "@theme";
 import { style } from "@vanilla-extract/css";
-import { container } from "~/styles/container/index.css";
 
-export const wrapper = style([
-  container.child({ size: "small" }),
+export const section_banner = flex({
+  theme: "darkBlueBanner",
+  background: true,
+  side: 3,
+  paddingInline: "medium",
+  wrap: true,
+});
+
+export const wrapper_top = style([
+  flex({
+    theme: "darkBlueBanner",
+    background: true,
+    //size: "medium",
+    paddingInline: "small",
+    direction: "column",
+    side: 5,
+    gap: "lg",
+    paddingBlock: "lg",
+  }),
   {
     borderImage:
       "linear-gradient(oklch(58.09% 0.1151 235.69 / 40%), oklch(97.44% 0.0134 240.95) / 20% ) fill 1",
-    display: "grid",
-    placeItems: "center",
-    gap: space.lg,
-    paddingBlock: space.lg,
   },
 ]);
 
@@ -25,13 +37,14 @@ export const hr = style([
  * MARK: BANNER
  */
 export const bannerWrapper = style([
-  container.child({ size: "large", background: true }),
   flex({
     direction: "row",
     side: 4,
     wrap: true,
     justifyContent: "evenly",
     gap: "lg",
+    size: "large",
+    background: true,
   }),
   {
     "@media": {

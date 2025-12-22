@@ -18,7 +18,12 @@ export default component$(() => {
         {["Stérisation", "Expertise", "qualité", "prix"].map((el, index) => (
           <li
             key={el + index}
-            class={flex({ direction: "row", side: 5, gap: "xxs" })}
+            class={flex({
+              direction: "row",
+              side: 5,
+              gap: "1rem",
+              marginBlockStart: "sm",
+            })}
           >
             <MonIconeSVG width={16} height={16} />
             <p class={text.li}>{el}</p>

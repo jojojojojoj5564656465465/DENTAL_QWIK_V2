@@ -1,4 +1,4 @@
-import { textRecipe } from "@recipe";
+import { textRecipe, grid } from "@recipe";
 import { fontSize, media } from "@styles/token";
 import { fluid } from "@styles/utils/utils.ts";
 import { color } from "@theme";
@@ -9,17 +9,15 @@ import {
   styleVariants,
 } from "@vanilla-extract/css";
 
-import { container, containerGrid } from "@container";
-
 export const sectionContainerIndex = style([
   textRecipe({ textAlign: "center" }),
   {
     // textAlign: "center",
   },
-  container.parent({ theme: "blueLightBg", marginBlock: "md" }),
+  grid({ theme: "blueLightBg", marginBlock: "md" }),
 ]);
 export const sectionContainer__Text = styleVariants({
-  wrapper: [container.child({ size: "small", marginBlock: "sm" })],
+  wrapper: [grid({ size: "small", marginBlock: "sm" })],
   h6: [textRecipe({ font: "preTitle", textAlign: "center" })],
   h2: [textRecipe({ font: "title", textAlign: "center" })],
 });
@@ -51,8 +49,8 @@ export const gridContainer = style([
       },
     },
   },
-  containerGrid({ theme: "blueLightBg" }),
-  container.child({ size: "large" }),
+  grid({ theme: "blueLightBg" }),
+  grid({ size: "large" }),
 ]);
 /**
  * MARK: card

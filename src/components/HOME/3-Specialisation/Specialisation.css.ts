@@ -1,24 +1,15 @@
-import { container, containerGrid } from "@container";
-import { flex } from "@recipe";
-import { space } from "@styles/token";
+import { flex, grid, textSprinkles as sprinkle } from "@recipe";
 import { color } from "@theme";
 import { globalStyle, style, styleVariants } from "@vanilla-extract/css";
 
 export const parent = style([
-  container.parent({ background: false, marginBlock: "lg" }),
-]);
-export const child = style([
-  container.child({
+  grid({
     background: false,
-    hover: false,
+    marginBlock: "lg",
+    theme: "blueLightBg",
     size: "medium",
-  }),
-  containerGrid({
-    background: false,
-    cols: 4,
-    gap: true,
-    //size: "medium",
-    //fullSize: "large",
+    numberColumn: 4,
+    gap: "sm",
   }),
 ]);
 
@@ -29,13 +20,20 @@ export const CardStyle = styleVariants({
     inlineSize: 55,
   },
   wrapper: [
-    container.child({
+    flex({
+      direction: "column",
+      gap: "xxs",
+      side: 1,
       background: true,
       hover: true,
-      size: "large",
+      theme: "whiteBg",
     }),
-    flex({ direction: "column", gap: "xxs", side: 1 }),
-
+    sprinkle({
+      cursor: "pointer",
+      p: "1.75rem",
+      overflow: "hidden",
+      borderColor: "accent",
+    }),
     {
       ":before": {
         backgroundColor: color.variable.accent,
@@ -46,16 +44,12 @@ export const CardStyle = styleVariants({
         left: 0,
         maskImage: "linear-gradient(to bottom, transparent 20%, black 100%)",
         position: "absolute",
-
         transition: "bottom 0.4s ease-out",
         zIndex: -1,
       },
-      borderRadius: 30,
-      //outline: color.variable.darkDark,
-      cursor: "pointer",
-      overflow: "hidden",
-      padding: space.sm,
-
+      borderRadius: 10,
+      borderWidth: "1.2px",
+      borderStyle: "solid",
       selectors: {
         "&:hover::before": {
           bottom: "0",

@@ -1,6 +1,6 @@
 import { color } from "@theme";
 import { createVar, keyframes, style } from "@vanilla-extract/css";
-import { fluid } from "~/styles/index.css";
+import { fluid } from "@styles/utils/utils.ts";
 export const imgUrl = createVar();
 /**
  * Overlay pour les images linear-gradient

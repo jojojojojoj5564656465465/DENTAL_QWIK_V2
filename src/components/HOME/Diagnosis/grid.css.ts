@@ -1,7 +1,7 @@
 import { textRecipe } from "@recipe";
 import { media } from "@styles/token";
 import { styleVariants } from "@vanilla-extract/css";
-import { container } from "@container";
+import { grid } from "@recipe";
 
 export const elementVariants = styleVariants({
   parent: {
@@ -17,7 +17,7 @@ export const elementVariants = styleVariants({
 
 export const gridVariants = styleVariants({
   child: [
-    container.child({ size: "large", display: "grid" }),
+    grid({ size: "large" }),
     {
       gap: "1.5rem",
       "@media": {

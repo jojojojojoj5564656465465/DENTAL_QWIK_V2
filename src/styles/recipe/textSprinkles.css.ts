@@ -28,11 +28,10 @@ const colorProperties = defineProperties({
   shorthands: {
     bg: ["backgroundColor"],
     bc: ["borderColor"],
-    outline: ["outlineColor"],
+
     textDecoration: ["textDecorationColor"],
     stroke: ["strokeColor"],
     fill: ["fill"],
-    caret: ["caretColor"],
   },
 });
 

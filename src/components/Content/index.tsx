@@ -1,5 +1,5 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { containerGrid } from "@container";
+import { grid } from "@recipe";
 import { textRecipe as R } from "@recipe";
 
 interface Props {
@@ -13,9 +13,7 @@ interface Props {
 export default component$<Props>(
   ({ subtitle, PreTitle, title, description, textAlign = "left" }) => {
     return (
-      <div
-        class={[containerGrid({ size: "small", background: false, gap: true })]}
-      >
+      <div class={[grid({ size: "small", background: false, gap: "sm" })]}>
         <h5 class={R({ font: "preTitle", textAlign })}>{subtitle}</h5>
         <h2 class={R({ font: "title", textAlign, lineHeight: "snug" })}>
           <br />

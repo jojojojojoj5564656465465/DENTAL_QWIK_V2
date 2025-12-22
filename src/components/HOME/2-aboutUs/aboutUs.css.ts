@@ -1,28 +1,29 @@
-import { containerGrid, container } from "@container";
-import { textRecipe } from "@recipe";
-import { media, space } from "@styles/token";
-import { fluid } from "@styles/utils/utils.ts";
+import { textRecipe, flex } from "@recipe";
+import { media } from "@styles/token";
+import { fluid } from "@styles/utils/utils.css.ts";
 import { createVar, style, styleVariants } from "@vanilla-extract/css";
-
+import { grid } from "@recipe";
 /**
  * WRAPPER DE LA PAGE INDEX
  */
-export const childWrapper = style([
-  container.child({
+export const index_section = style([
+  grid({
+    //numberColumn: 2,
     background: false,
     hover: false,
     size: "medium",
+    theme: "blueLightBg",
+    gap: "lg",
   }),
-  containerGrid({ cols: 2 }),
-
   {
     "@media": {
-      "(width< 846px)": {
+      [media.tablet]: {
         gridTemplateColumns: "1fr",
       },
+      [media.md]: {
+        gridTemplateColumns: "1fr 1fr",
+      },
     },
-    // border: `${color.theme.primary} 5px solid`,
-    gap: fluid(10, 50),
   },
 ]);
 
@@ -31,11 +32,10 @@ export const childWrapper = style([
  */
 export const content__wrapper = style({
   alignSelf: "center",
-  display: "grid",
-  gap: fluid(10, 50),
+
   marginTop: 10,
   //inlineSize: '100%',
-  minInlineSize: 300,
+
   zIndex: 2,
 });
 
@@ -43,37 +43,10 @@ export const text = styleVariants({
   li: [
     textRecipe({ font: "highLight" }),
     {
-      alignItems: "center",
-      display: "flex",
       listStyle: "none",
-      // ":before": {
-      // 	width: liSizeMask,
-      // 	height: liSizeMask,
-      // 	marginInlineEnd: "min(5px + 1vw, 10px)",
-      // 	display: "inline",
-      // 	backgroundSize: "cover",
-      // 	fill: "darkgreen",
-      // 	content: "",
-      // 	backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="red" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="%231C274C" stroke-width="1.5"/><path stroke="%231C274C" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m8.5 12.5 2 2 5-5"/></svg>')`,
-      // 	//
-      // 	//
-      // 	//
-      // 	//
-      // 	//
-      // 	// maskImage: 'public/check.svg',
-      // 	maskSize: "contain",
-      // 	maskRepeat: "no-repeat",
-      // 	maskPosition: "center", // Utilisera la couleur du texte (rouge)
-      // },
     },
   ],
-  ul: [
-    {
-      display: "grid",
-      gap: space.xs,
-      gridTemplateColumns: "repeat(auto-fit,minmax(9.40rem,1fr))",
-    },
-  ],
+  ul: [flex({ direction: "row", wrap: true, gap: "md", side: 4 }), {}],
 });
 
 /**

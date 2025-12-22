@@ -6,7 +6,7 @@ import {
   useStylesScoped$,
 } from "@builder.io/qwik";
 import { Image } from "@unpic/qwik";
-import { container } from "~/styles/container/index.css";
+import { grid } from "@recipe";
 import styles from "./Testimonial-section.css?inline";
 
 interface Testimonial {
@@ -114,9 +114,7 @@ const TestimonialSection = component$(() => {
     }),
   );
   return (
-    <section
-      class={[container.child({ size: "medium" }), "testimonial-section"]}
-    >
+    <section class={[grid({ size: "medium" }), "testimonial-section"]}>
       {/* Partie gauche - Image et Note */}
       <Testimonialleft note={note.value} />
 
@@ -188,7 +186,7 @@ const TestimonialSection = component$(() => {
 export default component$(() => {
   return (
     <section
-      class={container.parent({
+      class={grid({
         theme: "darkBlueBanner",
         paddingBlock: "md",
         marginBlock: "md",

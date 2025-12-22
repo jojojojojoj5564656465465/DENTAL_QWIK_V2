@@ -3,45 +3,27 @@ import { fallbackVar, style, styleVariants } from "@vanilla-extract/css";
 import { space } from "../token";
 //import { defaultContainer } from "../utils/base.css";
 import { colorTheme, theme } from "../utils/themeNew.css.ts";
-
 import { textSprinkles } from "./textSprinkles.css";
+import { calc } from "@vanilla-extract/css-utils";
 
-const paddingBlock = {
-  sm: textSprinkles({ paddingBlock: "sm" }),
-  md: textSprinkles({ paddingBlock: "md" }),
-  lg: textSprinkles({ paddingBlock: "lg" }),
-  xl: textSprinkles({ paddingBlock: "xl" }),
-  xxl: textSprinkles({ paddingBlock: "xxl" }),
-  xxxl: textSprinkles({ paddingBlock: "xxxl" }),
-};
-const marginBlock = {
-  sm: textSprinkles({ marginBlock: "sm" }),
-  md: textSprinkles({ marginBlock: "md" }),
-  lg: textSprinkles({ marginBlock: "lg" }),
-  xl: textSprinkles({ marginBlock: "xl" }),
-  xxl: textSprinkles({ marginBlock: "xxl" }),
-  xxxl: textSprinkles({ marginBlock: "xxxl" }),
-  auto: textSprinkles({ marginBlock: "auto" }),
-};
-const marginBlockStart = {
-  sm: textSprinkles({ marginBlockStart: "sm" }),
-  md: textSprinkles({ marginBlockStart: "md" }),
-  lg: textSprinkles({ marginBlockStart: "lg" }),
-  xl: textSprinkles({ marginBlockStart: "xl" }),
-  xxl: textSprinkles({ marginBlockStart: "xxl" }),
-  xxxl: textSprinkles({ marginBlockStart: "xxxl" }),
-  auto: textSprinkles({ marginBlockStart: "auto" }),
-};
+const gapVariants = styleVariants(space, (length) => ({
+  gap: length,
+}));
+const spacingVariant = (property: keyof Parameters<typeof textSprinkles>[0]) =>
+  ({
+    sm: textSprinkles({ [property]: "sm" }),
+    md: textSprinkles({ [property]: "md" }),
+    lg: textSprinkles({ [property]: "lg" }),
+    xl: textSprinkles({ [property]: "xl" }),
+    xxl: textSprinkles({ [property]: "xxl" }),
+    xxxl: textSprinkles({ [property]: "xxxl" }),
+    auto: textSprinkles({ [property]: "auto" }),
+  }) as const;
 
-const marginBlockEnd = {
-  sm: textSprinkles({ marginBlockEnd: "sm" }),
-  md: textSprinkles({ marginBlockEnd: "md" }),
-  lg: textSprinkles({ marginBlockEnd: "lg" }),
-  xl: textSprinkles({ marginBlockEnd: "xl" }),
-  xxl: textSprinkles({ marginBlockEnd: "xxl" }),
-  xxxl: textSprinkles({ marginBlockEnd: "xxxl" }),
-  auto: textSprinkles({ marginBlockEnd: "auto" }),
-};
+const paddingBlock = spacingVariant("paddingBlock");
+const marginBlock = spacingVariant("marginBlock");
+const marginBlockStart = spacingVariant("marginBlockStart");
+const marginBlockEnd = spacingVariant("marginBlockEnd");
 
 const sizeContainer = {
   small: "60rem",
@@ -51,20 +33,32 @@ const sizeContainer = {
   xxl: "120rem",
 } as const;
 
-// export const inlineSizeVar = createVar({
-//   inherits: false,
-//   syntax: "<string>",
-//   initialValue: "none",
-// });
-
 export const sizeVar = styleVariants(sizeContainer, (length, key) => {
+  const calculatedLength = calc("100%")
+    .subtract("clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem)")
+    .multiply(2)
+    .toString();
   const maxInlineSizeValue =
     key === "full"
       ? "none"
-      : `min(calc(100% - clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem) * 2), ${length})`;
-
+      : // : `min(calc(100% - clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem) * 2), ${length})`;
+        `min(${calculatedLength}, ${length})`;
   return {
     maxInlineSize: maxInlineSizeValue,
+  };
+});
+
+const paddingInline = styleVariants(sizeContainer, (length, key) => {
+  const paddingValueMdVw = calc("100vw").subtract(length).divide(2).toString();
+  const paddingValue = key === "full" ? "0" : paddingValueMdVw;
+  return {
+    //maxInlineSize: "none !important",
+    paddingInline: "clamp(0.75rem, 0.42rem + 1.7vw, 1.7rem)",
+    "@media": {
+      "all and ( width > 60rem)": {
+        paddingInline: paddingValue,
+      },
+    },
   };
 });
 
@@ -87,7 +81,6 @@ export const flex = recipe({
   variants: {
     direction: {
       row: { flexDirection: "row" },
-      rowReverse: { flexDirection: "row-reverse" },
       column: { flexDirection: "column" },
     },
     side: {
@@ -120,25 +113,7 @@ export const flex = recipe({
         flexWrap: "wrap",
       },
     },
-    gap: {
-      xxxs: { gap: space.xxxs },
-      xxs: { gap: space.xxs },
-      xs: { gap: space.xs },
-      sm: { gap: space.sm },
-      md: { gap: space.md },
-      lg: { gap: space.lg },
-      xl: { gap: space.xl },
-      xxl: { gap: space.xxl },
-      xxxl: { gap: space.xxxl },
-      "1rem": { gap: space["1rem"] },
-      "1.25rem": { gap: space["1.25rem"] },
-      "1.5rem": { gap: space["1.5rem"] },
-      "1.75rem": { gap: space["1.75rem"] },
-      "2rem": { gap: space["2rem"] },
-      "2.25rem": { gap: space["2.25rem"] },
-      "2.5rem": { gap: space["2.5rem"] },
-      "2.75rem": { gap: space["2.75rem"] },
-    },
+    gap: gapVariants,
 
     /**MARK: GLOBAL
      *
@@ -178,6 +153,7 @@ export const flex = recipe({
       },
     },
     size: sizeVar,
+    paddingInline,
     theme: {
       ...colorTheme,
     },

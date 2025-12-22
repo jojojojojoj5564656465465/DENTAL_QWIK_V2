@@ -7,14 +7,15 @@ import {
   createThemeContract,
 } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { defaultContainer } from "../utils/base.css";
-import { colorTheme, theme } from "../utils/themeNew.css";
-import { media, space } from "../token";
+import { defaultContainer } from "../utils/base.css.ts";
+import { colorTheme, theme } from "../utils/themeNew.css.ts";
+import { media, space } from "../token/index.ts";
 import { calc } from "@vanilla-extract/css-utils";
 import { fluid } from "../utils/utils.ts";
 import { containerSize } from "../utils/base.css.ts";
 
 import { textSprinkles } from "@/styles/recipe/textSprinkles.css";
+
 const gridMinColSize = createVar({
   syntax: "<length-percentage>",
   inherits: false,
@@ -28,19 +29,16 @@ const vars = createThemeContract({
 });
 
 const numberOfColumnVars = style({
-  //gridTemplateAreas: '"left . . right"',
   vars: assignVars(vars, {
     col: "3",
   }),
   "@media": {
     [media.tablet]: {
-      //gridTemplateAreas: '"left . . . . . right"',
       vars: assignVars(vars, {
         col: "6",
       }),
     },
     [media.md]: {
-      //gridTemplateAreas: '"left . . . . . . . . . . . . right"',
       vars: assignVars(vars, {
         col: "12",
       }),
@@ -60,7 +58,7 @@ const gridGap = createVar({
 const containerGridVariant = styleVariants(rest, (size) => [
   numberOfColumnVars,
   {
-    gridTemplateColumns: `[left] 1fr [content-start] repeat(${vars.col}, calc((min(${calc.subtract("100%", fluid(40, 80))}, ${size ?? "60rem"}) - calc((${vars.col} - 1) * ${fallbackVar(gridGap, "0.1px")})) / ${vars.col})) [content-end] 1fr [right]`,
+    gridTemplateColumns: `1fr repeat(${vars.col}, calc((min(${calc.subtract("100%", fluid(40, 80))}, ${size ?? "60rem"}) - calc((${vars.col} - 1) * ${fallbackVar(gridGap, "0.1px")})) / ${vars.col})) 1fr `,
     gap: gridGap,
   },
 ]);
@@ -68,7 +66,7 @@ const containerGridVariant = styleVariants(rest, (size) => [
 /**
  * MARK: CLASSIQUE VARIANTS
  */
-export const sizeVariants = styleVariants(containerSize, (length, key) => {
+const sizeVariants = styleVariants(containerSize, (length, key) => {
   const maxInlineSizeValue =
     key === "full"
       ? "none"
@@ -76,7 +74,7 @@ export const sizeVariants = styleVariants(containerSize, (length, key) => {
 
   return {
     maxInlineSize: maxInlineSizeValue,
-    gridTemplateColumns: `repeat(auto-fill, ${calc.subtract(gridMinColSize, fallbackVar(gridGap, "0rem"))})`,
+    gridTemplateColumns: `repeat(auto-fit, ${calc.subtract(gridMinColSize, fallbackVar(gridGap, "0rem"))})`,
   };
 });
 
@@ -134,12 +132,12 @@ const paddingBlock = spacingVariant("paddingBlock");
 const marginBlock = spacingVariant("marginBlock");
 const marginBlockStart = spacingVariant("marginBlockStart");
 const marginBlockEnd = spacingVariant("marginBlockEnd");
-export default recipe({
+
+export const grid = recipe({
   base: [
     defaultContainer,
     {
       gridAutoFlow: "row",
-      marginInline: "auto",
       display: "grid",
     },
   ],

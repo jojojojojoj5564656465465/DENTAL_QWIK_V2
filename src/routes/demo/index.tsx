@@ -1,13 +1,13 @@
 import { component$ } from "@builder.io/qwik";
 
-import C from "@/styles/container/containerGridv2.css.ts";
+import { grid } from "@recipe";
 export default component$(() => {
   return (
     <section
       class={[
-        C({
-          size:'medium',
-          numberColumn:4,
+        grid({
+          size: "medium",
+          numberColumn: 4,
           theme: "darkBlueBanner",
           background: true,
           gap: "1rem",

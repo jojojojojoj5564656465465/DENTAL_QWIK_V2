@@ -4,8 +4,7 @@ import {
   useSignal,
   useVisibleTask$,
 } from "@builder.io/qwik";
-import { textRecipe as R, textSprinkles as S } from "@recipe";
-import { containerGridMaxColumn } from "~/styles/container/index.css.ts";
+import { grid, textRecipe as R, textSprinkles as S } from "@recipe";
 
 import D from "./data.ts";
 import { hr } from "./vanity.css.ts";
@@ -74,9 +73,9 @@ const CardEl = component$<Props>(({ title, symbol, subtitle, text }) => {
 export default component$(() => {
   return (
     <section
-      class={containerGridMaxColumn({
+      class={grid({
         theme: "whiteBg",
-        maxColumn: 4,
+        numberColumn: 4,
         size: "large",
         background: true,
         marginBlock: "sm",

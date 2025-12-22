@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { containerGridMaxColumn } from "@container";
+import { grid } from "@recipe";
 import Title from "@/components/Content";
 import Button from "../../Button";
 
@@ -46,76 +46,73 @@ const contactInfo = [
 export default component$(() => {
   return (
     <section
-      class={containerGridMaxColumn({
+      class={grid({
         theme: "blueLightBg",
-        size: "medium",
-        maxColumn: 2,
-        sizeOfBox: 300,
+        size: "large",
+        numberColumn: 2,
       })}
     >
-      <div class="grid min-h-full grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
-        {/* Colonne Gauche: Carte */}
-        <div class="h-full w-full overflow-hidden rounded-lg shadow-md">
-          <div class="relative h-full w-full">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1909.252626467542!2d2.253638568086615!3d48.89205816090465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6650c677f09b9%3A0xa442b8d32866bcdf!2s20%20Rue%20de%20l'Abreuvoir%2C%2092400%20Courbevoie!5e0!3m2!1sfr!2sfr!4v1759225034118!5m2!1sfr!2sfr"
-              class="absolute top-0 left-0 h-full w-full"
-              style="border:0;"
-              allowFullscreen={true}
-              title="Google Maps - 20 Rue de l'Abreuvoir, 92400 Courbevoie"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+      {/* Colonne Gauche: Carte */}
+      <div class="h-full w-full overflow-hidden rounded-lg shadow-md">
+        <div class="relative h-full w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1909.252626467542!2d2.253638568086615!3d48.89205816090465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6650c677f09b9%3A0xa442b8d32866bcdf!2s20%20Rue%20de%20l'Abreuvoir%2C%2092400%20Courbevoie!5e0!3m2!1sfr!2sfr!4v1759225034118!5m2!1sfr!2sfr"
+            class="absolute top-0 left-0 h-full w-full"
+            style="border:0;"
+            allowFullscreen={true}
+            title="Google Maps - 20 Rue de l'Abreuvoir, 92400 Courbevoie"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
+      </div>
 
-        {/* Colonne Droite: Informations de Contact */}
-        <div class="align-items-start grid gap-4 md:gap-6">
-          <div>
-            <Title
-              subtitle="Trouvez-nous"
-              PreTitle="Notre Localisation"
-              title=" à Courbevoie"
-            >
-              <div class="mt-4 grid gap-3 md:gap-4">
-                {contactInfo.map((item) => (
-                  <div key={item.id} class="flex items-center gap-x-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="h-6 w-6 shrink-0 text-teal-500"
-                      aria-labelledby={`contact-icon-title-${item.id}`}
-                      role="img"
-                    >
-                      <title id={`contact-icon-title-${item.id}`}>
-                        {item.ariaLabel}
-                      </title>
-                      {item.iconPaths.map((path) => (
-                        <path
-                          key={path.d}
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d={path.d}
-                        />
-                      ))}
-                    </svg>
-                    <span>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-              <span class="mt-5 grid w-full justify-items-start text-white">
-                <Button
-                  text="Doctolib"
-                  href="https://www.doctolib.fr/"
-                  btnStyle="Big"
-                  ariaLabel="Prendre rendez-vous"
-                />
-              </span>
-            </Title>
-          </div>
+      {/* Colonne Droite: Informations de Contact */}
+      <div class="align-items-start grid gap-4 md:gap-6">
+        <div>
+          <Title
+            subtitle="Trouvez-nous"
+            PreTitle="Notre Localisation"
+            title=" à Courbevoie"
+          >
+            <div class="mt-4 grid gap-3 md:gap-4">
+              {contactInfo.map((item) => (
+                <div key={item.id} class="flex items-center gap-x-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-6 w-6 shrink-0 text-teal-500"
+                    aria-labelledby={`contact-icon-title-${item.id}`}
+                    role="img"
+                  >
+                    <title id={`contact-icon-title-${item.id}`}>
+                      {item.ariaLabel}
+                    </title>
+                    {item.iconPaths.map((path) => (
+                      <path
+                        key={path.d}
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d={path.d}
+                      />
+                    ))}
+                  </svg>
+                  <span>{item.text}</span>
+                </div>
+              ))}
+            </div>
+            <span class="mt-5 grid w-full justify-items-start text-white">
+              <Button
+                text="Doctolib"
+                href="https://www.doctolib.fr/"
+                btnStyle="Big"
+                ariaLabel="Prendre rendez-vous"
+              />
+            </span>
+          </Title>
         </div>
       </div>
     </section>

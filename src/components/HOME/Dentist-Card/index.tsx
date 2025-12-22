@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import { containerGridMaxColumn } from "@container";
+import { grid } from "@recipe";
+
 import { Image } from "@unpic/qwik";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Button from "../../Button/index.tsx";
@@ -106,9 +107,9 @@ const ItemDentistsCard = component$<DentistCardProps>((props) => {
 export default component$(() => {
   return (
     <section
-      class={containerGridMaxColumn({
+      class={grid({
         size: "medium",
-        maxColumn: 4,
+        numberColumn: 3,
         background: true,
         gap: "sm",
         paddingBlock: "md",
