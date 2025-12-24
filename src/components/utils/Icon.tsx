@@ -62,7 +62,7 @@ export default component$<SVGProps<SVGSVGElement>>((props) => {
         svgContent.value = content;
       } catch (error) {
         console.error(
-          `[Qwik Icon] Erreur lors du chargement de l'icône "${name}":`,
+          `[Qwik @Icon] Erreur lors du chargement de l'icône "${name}":`,
           error,
         );
       }

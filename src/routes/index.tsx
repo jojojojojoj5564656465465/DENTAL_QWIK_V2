@@ -16,14 +16,14 @@ import {
 export default component$(() => {
   return (
     <section>
-      {/* <Hero /> */}
-      {/* <AboutUs /> */}
+      <Hero />
+      <AboutUs />
       <Specialisation />
       <ImageFilter />
       <Avis />
+      <Diagnosis />
       <DentistCard />
       <How3 />
-      <Diagnosis />
 
       <Location />
       <VanityMetrics />

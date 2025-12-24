@@ -52,20 +52,20 @@ const Testimonialleft = component$<TestimonialLeftProps>((props) => {
     <div class="testimonial-left">
       <div class="image-container">
         <div class="testimonial-image" />
-        <div class="rating-overlay">
-          <div class="rating-score">{props.note}/5</div>
-          <div class="rating-details">
-            <p class="rating-description">
-              Note donnée par nos patients après leur visite
-            </p>
-            <div class="rating-stars">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <span key={`star-${index}`}>
-                  {index < props.note ? "★" : "☆"}
-                </span>
-              ))}
-              <span class="rating-reason">Pour un service excellent</span>
-            </div>
+      </div>
+      <div class="rating-overlay">
+        <div class="rating-score">{props.note}/5</div>
+        <div class="rating-details">
+          <p class="rating-description">
+            Note donnée par nos patients après leur visite
+          </p>
+          <div class="rating-stars">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <span key={`star-${index}`}>
+                {index < props.note ? "★" : "☆"}
+              </span>
+            ))}
+            <span class="rating-reason">Pour un service excellent</span>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@ const TestimonialSection = component$(() => {
     }),
   );
   return (
-    <section class={[grid({ size: "medium" }), "testimonial-section"]}>
+    <section class={[grid({ size: "medium", paddingBlock: "sm" }), "testimonial-section"]}>
       {/* Partie gauche - Image et Note */}
       <Testimonialleft note={note.value} />
 

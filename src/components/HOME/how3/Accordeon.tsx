@@ -12,6 +12,7 @@ import {
 } from "@builder.io/qwik";
 import { li_content, liHeader, liWrapper, ul } from "./content.css";
 import styles from "./main.css?inline";
+import Icon from "@Icon"; // Vérifie la compatibilité avec Qwik ou utilise @qwikest/icons
 
 export interface ItemProps {
   title: string;
@@ -31,19 +32,19 @@ const Accordion = component$(() => {
     {
       id: 0,
       title: "Prendre rendez-vous",
-      icon: "/svg/How/icon-how-it-work-1.svg", // Chemin relatif
+      icon: "icon-how-it-work-1", // Chemin relatif
       description: "Prenez rendez-vous facilement en ligne ou par téléphone.",
     },
     {
       id: 1,
       title: "Tiers Payant",
-      icon: "/svg/How/icon-how-it-work-2.svg", // Chemin relatif
+      icon: "icon-how-it-work-2",
       description: "Bénéficiez du tiers payant pour la plupart des soins.",
     },
     {
       id: 2,
       title: "Soins experts",
-      icon: "/svg/How/icon-how-it-work-3.svg", // Chemin relatif
+      icon: "icon-how-it-work-3",
       description:
         "Recevez des soins dentaires experts dans un environnement moderne.",
     },
@@ -87,13 +88,13 @@ const AccordionItem = component$<{ item: ItemProps }>(({ item }) => {
         aria-expanded={!!isOpen.value}
         aria-controls={`accordion-content-${item.id}`}
       >
-        <img
-          src={item.icon}
-          width={40}
-          height={40}
-          alt={`Icône pour ${item.title}`}
+        <Icon
           class="accordion-icon"
+          name={item.icon}
+          width={"40"}
+          height={"40"}
         />
+
         <h4 class={li_content.txt1}>{item.title}</h4>
         <i
           class={[

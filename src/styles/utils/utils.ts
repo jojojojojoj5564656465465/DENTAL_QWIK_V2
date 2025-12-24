@@ -1,20 +1,5 @@
 import { type GlobalStyleRule, globalStyle } from "@vanilla-extract/css";
-import {
-  array,
-  description,
-  maxLength,
-  maxValue,
-  minLength,
-  minValue,
-  number,
-  object,
-  parse,
-  parser,
-  partialCheck,
-  pipe,
-  string,
-  transform,
-} from "valibot";
+import * as v from "valibot";
 import { custom } from "./layer.css.ts";
 
 /**
@@ -26,30 +11,30 @@ import { custom } from "./layer.css.ts";
  * @todo Implement this function.
  */
 const fluid = (minSize: number, maxSize: number) => {
-  const numberConvertToRem = pipe(
-    number(),
-    maxValue(490),
-    minValue(1),
-    transform((e) => e / 16),
-    description("convert to rem px"),
+  const numberConvertToRem = v.pipe(
+    v.number(),
+    v.maxValue(490),
+    v.minValue(1),
+    v.transform((e) => e / 16),
+    v.description("convert to rem px"),
   );
-  const fluid = pipe(
-    object({
+  const fluid = v.pipe(
+    v.object({
       minSize: numberConvertToRem,
       maxSize: numberConvertToRem,
     }),
-    partialCheck(
+    v.partialCheck(
       [["minSize"], ["maxSize"]],
       (input) => input.minSize < input.maxSize,
       "maxVwRem is less than minScreenW invert data",
     ),
-    transform((obj) => {
+    v.transform((obj) => {
       const slope = (obj.maxSize - obj.minSize) / (75 - 20);
       const yAxisIntersection = -20 * slope + obj.minSize;
       return `clamp(${obj.minSize}rem, ${yAxisIntersection}rem + ${slope * 100}vw, ${obj.maxSize}rem)`;
     }),
   );
-  const parserFluid = parser(fluid);
+  const parserFluid = v.parser(fluid);
   return parserFluid({ minSize, maxSize });
 };
 /**
@@ -89,23 +74,23 @@ const globalStyleTag = (
   }
 };
 
-// function boxShadowGenerator(colors: string[], spread = 1): string | undefined {
-// 	const ArrayLengthSchema = pipe(
-// 		array(string()),
-// 		minLength(2),
-// 		maxLength(7, "limite is 7 colors"),
-// 	);
-// 	const parserArrayLength = safeParser(ArrayLengthSchema);
-// 	const { success, output, issues } = parserArrayLength(colors);
-// 	!success && console.error("boxShadowGenerator", issues);
-// 	return success
-// 		? output
-// 			.map((color, index) => {
-// 					return `0 0 0 ${spread * (index + 1)}px ${color}`;
-// 				})
-// 			.join(", ")
-// 		: "";
-// }
+export function boxShadowGenerator(colors: unknown, spread = 1): string {
+  const ArrayLengthSchema = v.pipe(
+    v.array(v.string()),
+    v.minLength(2, "At least 2 colors are required"),
+    v.maxLength(7, "Maximum 7 colors allowed"),
+  );
+  const result = v.safeParse(ArrayLengthSchema, colors);
+  if (!result.success) {
+    throw new Error(
+      `Invalid colors: ${result.issues.map((i) => i.message).join(", ")}`,
+    );
+  }
+
+  return result.output
+    .map((color, index) => `0 0 0 ${spread * (index + 1)}px ${color}`)
+    .join(", ");
+}
 
 type DirectionGradien = "to top" | "to bottom" | "to left" | "to right";
 /**
@@ -120,16 +105,18 @@ const createBorderImage = (
   deg: number | DirectionGradien,
   ...colors: string[]
 ): string => {
-  const colorsValidation = pipe(
-    array(string()),
-    minLength(
+  const colorsValidation = v.pipe(
+    v.array(v.string()),
+    v.minLength(
       2,
       "La fonction nécessite au moins trois arguments : un angle ou une direction et au moins deux couleurs.",
     ),
-    maxLength(7, "limite is 7 colors"),
+    v.maxLength(7, "limite is 7 colors"),
   );
-  parse(colorsValidation, colors);
-  const isNumberP = parser(number());
+  v.parse(colorsValidation, colors);
+  const isNumberP = v.parser(
+    v.pipe(v.number(), v.minValue(1), v.maxValue(360)),
+  );
   const degreResult = isNumberP(deg) ? `${deg}deg` : deg;
   const gradient = `linear-gradient(${degreResult}, ${colors.join(", ")})`;
   return `${gradient} fill 1`;

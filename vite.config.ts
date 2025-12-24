@@ -2,7 +2,7 @@
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
  */
-
+//import path from 'node:path';
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -24,6 +24,12 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  */
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
+    build: {
+      ssr: true,
+      rollupOptions: {
+        input: ['src/entry.cloudflare-pages.tsx', '@qwik-city-plan'],
+      }
+    },
     plugins: [
       qwikCity(),
       qwikVite(),
@@ -32,7 +38,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
         
       }),
       tailwindcss(),
-      tsconfigPaths({ root: "." }),
+      tsconfigPaths({ root: ".", }),
     ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {

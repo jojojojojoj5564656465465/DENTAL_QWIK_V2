@@ -20,20 +20,22 @@ export const gridVariants = styleVariants({
     grid({ size: "large" }),
     {
       gap: "1.5rem",
+      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+      
       "@media": {
         [media.mobile]: {
-          display: "grid",
-          gridTemplateColumns: "1fr",
+          //display: "grid",
+          //gridTemplateColumns: "1fr",
           gridAutoRows: "auto",
         },
         [media.tablet]: {
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
+          //display: "grid",
+          //gridTemplateColumns: "repeat(2, 1fr)",
           gridAutoRows: "auto",
           alignItems: "start",
         },
         [media.md]: {
-          gridTemplateColumns: "repeat(3, 1fr)",
+          //gridTemplateColumns: "repeat(3, 1fr)",
           gridTemplateRows: "repeat(3, 1fr)",
           gridColumnGap: "2rem",
           gridRowGap: "1.5rem",

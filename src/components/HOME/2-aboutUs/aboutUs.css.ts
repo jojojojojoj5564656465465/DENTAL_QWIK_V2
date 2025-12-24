@@ -1,6 +1,6 @@
 import { textRecipe, flex } from "@recipe";
 import { media } from "@styles/token";
-import { fluid } from "@styles/utils/utils.css.ts";
+import { fluid } from "@styles/utils/utils.ts";
 import { createVar, style, styleVariants } from "@vanilla-extract/css";
 import { grid } from "@recipe";
 /**

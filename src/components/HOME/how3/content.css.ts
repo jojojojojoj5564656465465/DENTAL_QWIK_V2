@@ -1,6 +1,6 @@
 // /home/tom/Documents/DEV/dentistLanding/src/components/HOME/howItWorks/content.css.ts
 
-import { textRecipe as R } from "@recipe";
+import { textRecipe as R, grid } from "@recipe";
 import {
   createVar,
   keyframes,
@@ -54,13 +54,13 @@ export const bgImage = style({
 
 // Wrapper principal pour chaque élément de liste
 export const liWrapper = style([
-  //container({ background: true, theme: "whiteLD" }),
+  grid({ background: true, theme: "blueLightBg", gap: "1.25rem" }),
   {
     border: "2px solid oklch(0.8 0.0345 261.53)",
     borderRadius: "5px",
     cursor: "pointer",
     display: "grid",
-    gap: "10px",
+    //gap: "10px",
     gridTemplateColumns: "auto 1fr auto",
     gridTemplateRows: "auto auto",
     height: "auto",
@@ -240,7 +240,7 @@ export const iconBase = style({
 
 export const leftBoxWrapper = style({
   borderImage: createBorderImage(
-    0,
+    1,
     "oklch(0.4436 0.0937 249.88 / 50.47%)",
     "oklch(0.6484 0.0937 249.88 / 51.47%)",
   ),

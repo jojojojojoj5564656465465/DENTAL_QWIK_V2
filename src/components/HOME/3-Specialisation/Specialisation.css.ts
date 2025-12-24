@@ -47,7 +47,7 @@ export const CardStyle = styleVariants({
         transition: "bottom 0.4s ease-out",
         zIndex: -1,
       },
-      borderRadius: 1,
+      borderRadius: 10,
       borderWidth: "1.2px",
       borderStyle: "solid",
       selectors: {
