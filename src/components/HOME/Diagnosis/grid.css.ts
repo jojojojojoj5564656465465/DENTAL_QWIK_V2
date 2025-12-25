@@ -17,25 +17,21 @@ export const elementVariants = styleVariants({
 
 export const gridVariants = styleVariants({
   child: [
-    grid({ size: "large" }),
+    grid({ size: "large", numberColumn: 3, gap: "1.5rem" }),
     {
-      gap: "1.5rem",
-      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-      
+      //maxInlineSize: "60rem",
+
+      height: "100%",
       "@media": {
         [media.mobile]: {
-          //display: "grid",
-          //gridTemplateColumns: "1fr",
           gridAutoRows: "auto",
         },
-        [media.tablet]: {
-          //display: "grid",
-          //gridTemplateColumns: "repeat(2, 1fr)",
+        "only screen and (27rem <= width < 930px)": {
+          gridTemplateColumns: "repeat(2, 1fr)",
           gridAutoRows: "auto",
           alignItems: "start",
         },
         [media.md]: {
-          //gridTemplateColumns: "repeat(3, 1fr)",
           gridTemplateRows: "repeat(3, 1fr)",
           gridColumnGap: "2rem",
           gridRowGap: "1.5rem",

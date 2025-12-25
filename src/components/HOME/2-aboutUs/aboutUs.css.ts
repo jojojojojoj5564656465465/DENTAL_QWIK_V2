@@ -8,23 +8,24 @@ import { grid } from "@recipe";
  */
 export const index_section = style([
   grid({
-    //numberColumn: 2,
+    numberColumn: 2,
     background: false,
     hover: false,
     size: "medium",
     theme: "blueLightBg",
     gap: "lg",
+    paddingBlock: "sm",
   }),
-  {
-    "@media": {
-      [media.tablet]: {
-        gridTemplateColumns: "1fr",
-      },
-      [media.md]: {
-        gridTemplateColumns: "1fr 1fr",
-      },
-    },
-  },
+  // {
+  //   "@media": {
+  //     [media.tablet]: {
+  //       gridTemplateColumns: "1fr",
+  //     },
+  //     [media.md]: {
+  //      // gridTemplateColumns: "1fr 1fr",
+  //     },
+  //   },
+  // },
 ]);
 
 /**

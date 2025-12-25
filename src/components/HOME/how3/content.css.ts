@@ -1,6 +1,6 @@
 // /home/tom/Documents/DEV/dentistLanding/src/components/HOME/howItWorks/content.css.ts
 
-import { textRecipe as R, grid } from "@recipe";
+import { textRecipe as R, grid, textSprinkles } from "@recipe";
 import {
   createVar,
   keyframes,
@@ -54,7 +54,7 @@ export const bgImage = style({
 
 // Wrapper principal pour chaque élément de liste
 export const liWrapper = style([
-  grid({ background: true, theme: "blueLightBg", gap: "1.25rem" }),
+  grid({ background: true, theme: "whiteBg", gap: "1.25rem" }),
   {
     border: "2px solid oklch(0.8 0.0345 261.53)",
     borderRadius: "5px",
@@ -112,7 +112,7 @@ export const liHeader = style({
 // Variable CSS pour l'icône dynamique
 export const myContent = createVar({
   inherits: false,
-  initialValue: "url(src/assets/icons/icon-how-it-work-1.svg)",
+  initialValue: "url(/assets/icons/icon-how-it-work-1.svg)",
   syntax: "<string>",
 });
 
@@ -190,37 +190,26 @@ export const li_content = styleVariants({
   ],
 
   // Contenu ouvert
-  txt2Open: [
-    R({ font: "text" }),
+  open: [
+    R({ font: "text", display: "block" }),
+    textSprinkles({
+      color: "secondary",
+      cursor: "default",
+      marginBlockStart: "1rem",
+    }),
     {
-      borderTop: `1px solid ${color.theme.divider}`,
-      color: color.theme.secondary,
-      gridColumn: "1 / -1",
-      gridRow: "2 / 3",
-      lineHeight: "1.6",
-      marginTop: "10px",
-      maxHeight: "100px", // 👈 CHANGÉ DE height → maxHeight
-      opacity: 1, // 👈 AJOUTÉ
-      overflow: "hidden",
-      padding: "15px",
       transition:
         "max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out",
     },
   ],
 
   // Contenu fermé
-  txtClose: [
+  close: [
     {
-      backgroundColor: "pink",
-      gridColumn: "1 / -1",
-      gridRow: "2 / 3",
-      margin: "0px",
-      maxHeight: "0px",
-      opacity: 0,
-      overflow: "hidden",
-      padding: "0px",
-      transition:
-        "max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out",
+      cursor: "help",
+      //visibility: "hidden",
+      display: "none",
+      height: 0,
     },
   ],
 });

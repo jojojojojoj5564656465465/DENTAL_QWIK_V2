@@ -105,12 +105,8 @@ const AccordionItem = component$<{ item: ItemProps }>(({ item }) => {
         />
       </button>
 
-      <div
-        class="description"
-        aria-hidden={!isOpen.value}
-        style={`--show-description: ${isOpen.value ? "true" : "false"}`}
-      >
-        <p class={isOpen.value ? "openDescription" : "closeDescription"}>
+      <div class="description" aria-hidden={!isOpen.value}>
+        <p class={isOpen.value ? li_content.open : li_content.close}>
           {item.description}
         </p>
       </div>

@@ -21,10 +21,10 @@ export default component$(() => {
       <Specialisation />
       <ImageFilter />
       <Avis />
-      <Diagnosis />
       <DentistCard />
       <How3 />
 
+      <Diagnosis />
       <Location />
       <VanityMetrics />
     </section>

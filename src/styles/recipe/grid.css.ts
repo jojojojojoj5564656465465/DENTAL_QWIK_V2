@@ -137,7 +137,6 @@ export const grid = recipe({
   base: [
     defaultContainer,
     {
-      gridAutoFlow: "row",
       display: "grid",
     },
   ],

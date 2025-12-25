@@ -114,7 +114,12 @@ const TestimonialSection = component$(() => {
     }),
   );
   return (
-    <section class={[grid({ size: "medium", paddingBlock: "sm" }), "testimonial-section"]}>
+    <section
+      class={[
+        grid({ size: "medium", paddingBlock: "sm" }),
+        "testimonial-section",
+      ]}
+    >
       {/* Partie gauche - Image et Note */}
       <Testimonialleft note={note.value} />
 
