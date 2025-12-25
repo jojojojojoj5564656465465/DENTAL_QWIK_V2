@@ -4,7 +4,7 @@
  * SSR entry point, in all cases the application is rendered outside the browser, this
  * entry point will be the common one.
  *
- * - Server (express, cloudflare...)
+ * - Server (express, ...)
  * - npm run start
  * - npm run preview
  * - npm run build

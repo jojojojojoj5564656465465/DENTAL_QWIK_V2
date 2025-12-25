@@ -10,10 +10,9 @@
   "scripts": {
     "build": "qwik build",
     "build.client": "vite build",
-    "build.preview": "npm run build.client && vite build --ssr src/entry.preview.tsx",
-    "build.server": "npm run build.client && vite build -c adapters/cloudflare-pages/vite.config.ts",
+    "build.preview": "npm run build.client && vite build --ssr --mode preview",
+    "build.server": "npm run build.client && vite build --ssr src/entry.ssr.tsx",
     "build.types": "tsc --incremental --noEmit",
-    "deploy": "wrangler pages deploy ./dist",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
@@ -21,7 +20,6 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "lint:biome": "biome lint --write --unsafe ./src & biome format --write ./src & biome check ./src & tsc --incremental --noEmit",
     "preview": "npm run build && vite preview --open",
-    "serve": "wrangler pages dev ./dist --compatibility-flags=nodejs_als",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },
@@ -46,9 +44,8 @@
     "typescript-eslint": "8.38.0",
     "typescript-plugin-css-modules": "latest",
     "undici": "^7.16.0",
-    "vite": "^7.3.0",
-    "vite-tsconfig-paths": "^5.1.4",
-    "wrangler": "^4.56.0"
+    "vite": "^7.1.11",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "@vanilla-extract/sprinkles": "^1.6.5",

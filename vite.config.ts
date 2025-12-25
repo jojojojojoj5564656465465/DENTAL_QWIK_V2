@@ -24,12 +24,7 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  */
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
-    build: {
-      ssr: true,
-      rollupOptions: {
-        input: ['src/entry.cloudflare-pages.tsx', '@qwik-city-plan'],
-      }
-    },
+
     plugins: [
       qwikCity(),
       qwikVite(),
