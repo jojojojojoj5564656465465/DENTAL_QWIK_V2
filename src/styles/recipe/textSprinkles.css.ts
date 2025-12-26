@@ -78,6 +78,7 @@ const spaceMarginPadding = defineProperties({
       "paddingBlockStart",
     ],
   },
+  "@layer": "base",
 });
 
 // Define semantic line heights (unitless are generally recommended)
@@ -109,7 +110,7 @@ const fontWeights = {
 const letterSpacings = {
   tighter: "-0.05em",
   tight: "-0.025em",
-  normal: "0em",
+
   wide: "0.05em",
   wider: "0.1em",
   widest: "0.15em",
@@ -177,7 +178,7 @@ const textProperties = defineProperties({
     textDecoration: ["underline", "line-through", "none", "inherit"], // Could expand with 'overline' etc. if needed
     textDecorationColor: theme,
     textDecorationStyle: ["solid", "dotted", "dashed", "wavy"], // Optional
-    // textDecorationThickness: ['auto', 'from-font', '1px', '2px'], // Optional
+    textDecorationThickness: ['auto', 'from-font', '1px', '2px'], // Optional
     textOverflow: ["clip", "ellipsis", "inherit"],
     whiteSpace: ["normal", "nowrap", "pre", "pre-wrap", "pre-line", "inherit"],
     overflow: ["visible", "hidden", "clip", "scroll", "auto"], // Often used with textOverflow/whiteSpace
@@ -187,9 +188,11 @@ const textProperties = defineProperties({
     cursor: ["pointer", "default", "text", "not-allowed"], // Optional: If text acts as interactive element
     userSelect: ["none", "text", "all", "auto"], // Optional: Control text selection
     caret: ["auto", "default", "pointer", "text", "wait"], // Optional: Caret appearance
+
   },
   // No text-specific shorthands defined here, usually better to keep atomic
   // shorthands: { ... }
+  "@layer": "base",
 });
 
 // Combine text properties with margin/padding properties

@@ -59,7 +59,7 @@ const CardEl = component$<Props>(({ title, symbol, subtitle, text }) => {
         class={S({
           color: "primary",
           fontSize: "md",
-          letterSpacing: ["normal", "wide", "widest"],
+          letterSpacing: [ "wide", "widest"],
         })}
       >
         {subtitle}

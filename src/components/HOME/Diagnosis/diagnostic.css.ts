@@ -1,6 +1,6 @@
 import { textRecipe, grid } from "@recipe";
 import { fontSize, media } from "@styles/token";
-import { fluid } from "@styles/utils/utils.ts";
+
 import { color } from "@theme";
 import {
   createContainer,
@@ -30,28 +30,7 @@ const logoSize = createVar({
   initialValue: "70px",
   syntax: "<length>",
 });
-/**
- * MARK: GRID COMPO
- */
-export const gridContainer = style([
-  {
-    // gridTemplateRows: "repeat(auto-fit, minmax(8.1rem, 1fr ))",
-    gridAutoFlow: "column",
-    justifyContent: "center",
-    gap: fluid(10, 20),
-    "@media": {
-      "screen and (440px < width < 606px)": { columnGap: 11.5 },
-      [media.tablet]: {
-        gridTemplateRows: "10rem, repeat(3,6rem)",
-      },
-      [media.md]: {
-        gridTemplateRows: "repeat(3, 9rem)",
-      },
-    },
-  },
-  grid({ theme: "blueLightBg" }),
-  grid({ size: "large" }),
-]);
+
 /**
  * MARK: card
  */

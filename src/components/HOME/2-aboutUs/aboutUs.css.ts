@@ -13,19 +13,17 @@ export const index_section = style([
     hover: false,
     size: "medium",
     theme: "blueLightBg",
-    gap: "lg",
+    gap: "xs",
     paddingBlock: "sm",
   }),
-  // {
-  //   "@media": {
-  //     [media.tablet]: {
-  //       gridTemplateColumns: "1fr",
-  //     },
-  //     [media.md]: {
-  //      // gridTemplateColumns: "1fr 1fr",
-  //     },
-  //   },
-  // },
+  {
+    placeItems: "center",
+    "@media": {
+      [media.tablet]: {
+        gridTemplateColumns: "repeat(auto-fit minmax(350px, 1fr)) !important",
+      },
+    },
+  },
 ]);
 
 /**

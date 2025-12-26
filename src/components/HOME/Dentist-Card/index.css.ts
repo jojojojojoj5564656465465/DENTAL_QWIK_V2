@@ -1,6 +1,7 @@
 import { color } from "@theme";
 import { createVar, keyframes, style } from "@vanilla-extract/css";
 import { fluid } from "@styles/utils/utils.ts";
+import { textSprinkles as sp } from "@recipe";
 export const imgUrl = createVar();
 /**
  * Overlay pour les images linear-gradient
@@ -51,43 +52,45 @@ const angleKeyframes = keyframes({
 /**
  * Style pour le bouton plus en ABSOLUTE
  */
-const plusButton = style({
-  transform: angle,
-  animationName: angleKeyframes,
-  animationDuration: "5s",
-  animationIterationCount: "1",
-  position: "absolute",
-  bottom: "0.2rem",
-  right: "1.5rem",
-  inlineSize: "5rem",
-  aspectRatio: "1 / 1",
-  zIndex: "6",
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  outline: ".3em solid",
-  outlineColor: color.theme.secondary,
-  boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
-  transition: "all 0.3s ease-in-out 1s",
-  selectors: {
-    [`${clippy}:hover + &`]: {
-      outlineStyle: "dashed",
-      inlineSize: "6rem",
+const plusButton = style([
+  sp({ outlineColor: "secondary" }),
+  {
+    transform: angle,
+    animationName: angleKeyframes,
+    animationDuration: "5s",
+    animationIterationCount: "1",
+    position: "absolute",
+    bottom: "0.2rem",
+    right: "1.5rem",
+    inlineSize: "5rem",
+    aspectRatio: "1 / 1",
+    zIndex: "6",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    outline: ".3em solid",
+
+    boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
+    transition: "all 0.3s ease-in-out 1s",
+    selectors: {
+      [`${clippy}:hover + &`]: {
+        outlineStyle: "dashed",
+        inlineSize: "6rem",
+      },
+    },
+    ":hover": {
+      transform: "scale(1.1)",
+      boxShadow: "0 30px 60px -12px rgba(0,0,0,0.6)",
     },
   },
-  ":hover": {
-    transform: "scale(1.1)",
-    boxShadow: "0 30px 60px -12px rgba(0,0,0,0.6)",
-  },
-});
+]);
 export const photoPortraitDoctor = style([
   plusButton,
   {
     objectFit: "contain", // Cette propriété est pour les <img>, pas pour les background-image
     borderRadius: "50%", // Assure que le conteneur est un cercle parfait
     backgroundImage: imgUrl,
-    backgroundColor: "red",
     zIndex: 100,
     backgroundPosition: "center", // Centre l'image horizontalement et verticalement
     backgroundSize: "cover", // Redimensionne l'image pour qu'elle soit entièrement visible dans le conteneur

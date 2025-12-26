@@ -1,9 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import Button from "@components/Button";
 import { flex, textRecipe, textSprinkles } from "@recipe";
-//import { container } from "~/styles/container/index.css";
 
-/// tre.avif
 import * as s from "./hero.css";
 
 export default component$(() => {
