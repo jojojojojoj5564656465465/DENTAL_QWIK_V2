@@ -1,5 +1,5 @@
 import { textRecipe } from "@recipe";
-import { media } from "@styles/token";
+import { media } from "@/styles/token";
 import { styleVariants } from "@vanilla-extract/css";
 import { grid } from "@recipe";
 

@@ -1,6 +1,5 @@
-import { color } from "@theme";
 import { createVar, keyframes, style } from "@vanilla-extract/css";
-import { fluid } from "@styles/utils/utils.ts";
+import { fluid } from "@/styles/utils/utils.ts";
 import { textSprinkles as sp } from "@recipe";
 export const imgUrl = createVar();
 /**

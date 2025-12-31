@@ -6,7 +6,7 @@ export const Counter = component$(() => {
 
   return (
     <button
-      class="counter bg-red-100 "
+      class="counter bg-red-100 py-custom-dual-2-3"
       type="button"
       onClick$={() => count.value++}
     >

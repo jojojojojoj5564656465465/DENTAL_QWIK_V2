@@ -15,7 +15,6 @@ import { fluid } from "../utils/utils.ts";
 import { containerSize } from "../utils/base.css.ts";
 
 import { textSprinkles } from "@/styles/recipe/textSprinkles.css";
-import { base } from "@/styles/utils/layer.css.ts";
 const gridMinColSize = createVar({
   syntax: "<length-percentage>",
   inherits: false,
@@ -61,9 +60,7 @@ const containerGridVariant = styleVariants(rest, (size) => [
     gridTemplateColumns: `1fr repeat(${vars.col}, calc((min(${calc.subtract("100%", fluid(40, 80))}, ${size ?? "60rem"}) - calc((${vars.col} - 1) * ${fallbackVar(gridGap, "0.1px")})) / ${vars.col})) 1fr `,
     gap: gridGap,
 
-    "@layer": {
-      [base]: {},
-    },
+   
   },
 ]);
 
@@ -100,12 +97,14 @@ const numberOfColumns = styleVariants(NbColObj, (mediaQuery) => ({
   "@media": {
     [media.tablet]: {
       vars: {
-        [gridMinColSize]: `${100 / mediaQuery.tablet}%`,
+       // [gridMinColSize]: `${100 / mediaQuery.tablet}%`,
+        [gridMinColSize]: calc.divide("100%", mediaQuery.tablet),
       },
     },
     [media.md]: {
       vars: {
-        [gridMinColSize]: `${100 / mediaQuery.md}%`,
+        //[gridMinColSize]: `${100 / mediaQuery.md}%`,
+        [gridMinColSize]: calc.divide("100%", mediaQuery.md),
       },
     },
   },
@@ -201,5 +200,7 @@ export const grid = recipe({
   defaultVariants: {
     hover: false,
     background: true,
+    //size: "full",
   },
+  
 });

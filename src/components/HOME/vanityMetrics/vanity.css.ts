@@ -1,4 +1,4 @@
-import { space } from "@styles/token";
+import { space } from "@/styles/token";
 import { style } from "@vanilla-extract/css";
 
 export const hr = style({

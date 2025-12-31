@@ -1,6 +1,6 @@
 import { flex } from "@recipe";
-import { media, space } from "@styles/token";
-import { fluid } from "@styles/utils/utils.ts";
+import { media, space } from "@/styles/token";
+import { fluid } from "@/styles/utils/utils.ts";
 import { color } from "@theme";
 import { style } from "@vanilla-extract/css";
 

@@ -1,5 +1,5 @@
 import { textRecipe, grid } from "@recipe";
-import { fontSize, media } from "@styles/token";
+import { fontSize, media } from "@/styles/token";
 
 import { color } from "@theme";
 import {

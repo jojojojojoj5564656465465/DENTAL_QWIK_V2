@@ -1,4 +1,4 @@
-import { fontSize } from "@styles/token";
+import { fontSize } from "@/styles/token";
 import { fallbackVar, globalStyle } from "@vanilla-extract/css";
 import { color, fontFamily, theme } from "../utils/themeNew.css.ts";
 import { base, reset } from "./layer.css.ts";

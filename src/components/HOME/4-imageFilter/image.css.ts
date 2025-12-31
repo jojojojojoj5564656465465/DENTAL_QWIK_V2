@@ -1,5 +1,5 @@
-import { media } from "@styles/token";
-import { fluid } from "@styles/utils/utils";
+import { media } from "@/styles/token";
+import { fluid } from "@/styles/utils/utils";
 import { color } from "@theme";
 import { createVar, style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";

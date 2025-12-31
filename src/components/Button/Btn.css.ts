@@ -1,5 +1,5 @@
-import { fontSize, space } from "@styles/token/index.ts";
-import { color, fontFamily } from "@styles/utils/themeNew.css";
+import { fontSize, space } from "@/styles/token/index.ts";
+import { color, fontFamily } from "@/styles/utils/themeNew.css";
 import {
   createTheme,
   createThemeContract,

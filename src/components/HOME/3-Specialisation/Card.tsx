@@ -1,6 +1,6 @@
 import Icon from "@Icon"; // Assure-toi que cette bibliothèque est compatible avec Qwik ou utilise une alternative comme @qwikest/icons
 import { component$ } from "@builder.io/qwik";
-import { textRecipe } from "@styles/recipe/textRecipe.css";
+import { textRecipe } from "@/styles/recipe/textRecipe.css";
 import { CardStyle } from "./Specialisation.css";
 
 export default component$<Record<"icon" | "title" | "text", string>>(
